@@ -10,14 +10,15 @@
 CREATE TABLE personne(
         id_personne int (11) Auto_increment  NOT NULL ,
         login       Varchar (50) NOT NULL ,
+        mdp         Varchar (50) NOT NULL ,
         nom         Varchar (50) NOT NULL ,
         prenom      Varchar (50) NOT NULL ,
         adresse     Varchar (100) NOT NULL ,
         cdp         Varchar (5) NOT NULL ,
         ville       Varchar (50) NOT NULL ,
         fonction    Varchar (50) NOT NULL ,
-        PRIMARY KEY (login ) ,
-        UNIQUE (id_personne )
+        PRIMARY KEY (id_personne ) ,
+        UNIQUE (login )
 )ENGINE=InnoDB;
 
 
