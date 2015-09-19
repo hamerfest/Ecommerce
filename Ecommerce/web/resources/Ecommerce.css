@@ -8,10 +8,16 @@ and open the template in the editor.
     Author     : Matthieu
 */
 .panel_center{
-    margin-left: 50%;
-    margin-right: 50%;
+    margin: 0 auto;
 }
 
 .mainToolbar{
-    vertical-align: bottom;
+    margin-top: 3%;
+    background-color: blue;
+}
+
+. {
+    color:black;
+    background-color:white;
+    background-image:url(/Accueil.jpeg);
 }
