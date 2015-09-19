@@ -4,121 +4,126 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui" xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
-    
+
     <f:view contentType="text/html">
         <h:head>
+            <link rel="stylesheet" type="text/css" href="resources/Ecommerce.css" title="Ecommerce" />
             <f:facet name="first">
                 <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
-                <title>Formulaire Nouveau Compte</title>
+                <title>Formulaire nouveau compte</title>
             </f:facet>
         </h:head>
 
         <h:body>
+            <h:form>
+                <p:layout fullPage="true">
 
-            <p:layout fullPage="true">
+                    <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
 
-                <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
-                   
-                    <h:form>     
+
                         <p:growl id="messages" showDetail="true" />
- 
-                        <p:toolbar>
+
+                        <p:toolbar styleClass="mainToolbar">
+                            
                             <f:facet name="left">
                                 <p:commandButton type="button" value="Nos saucissons" icon="" />
- 
+
                                 <p:commandButton type="button" value="Nos fromages" icon="" />
-                                
+
                                 <p:commandButton type="button" value="Nos pâtés" icon="" />
- 
+
                             </f:facet>
- 
+
                             <f:facet name="right">
-                                 <p:menuButton value="Options">
+                                <p:menuButton value="Options">
                                     <p:menuitem value="Homepage" url="http://localhost:8080/Ecommerce/" icon="ui-icon-extlink" />
                                 </p:menuButton>
                             </f:facet>
- 
+
                         </p:toolbar>
-                    </h:form> 
-                    
-                </p:layoutUnit>
 
-                <p:layoutUnit position="south" size="100" closable="true" collapsible="true">
-                    Footer
-                </p:layoutUnit>
-                
-                <p:layoutUnit position="east" size="175" header="Left" collapsible="true">
-                    <p:menu>
-                        <p:submenu label="Resources">
-                            <p:menuitem value="Demo" url="http://www.primefaces.org/showcase-labs/ui/home.jsf" />
-                            <p:menuitem value="Documentation" url="http://www.primefaces.org/documentation.html" />
-                            <p:menuitem value="Forum" url="http://forum.primefaces.org/" />
-                            <p:menuitem value="Themes" url="http://www.primefaces.org/themes.html" />
 
-                        </p:submenu>
+                    </p:layoutUnit>
 
-                    </p:menu>
-                </p:layoutUnit>
+                    <p:layoutUnit position="south" size="100" closable="true" collapsible="true">
+                        Footer
+                    </p:layoutUnit>
 
-                <p:layoutUnit position="center">
-                    <h:form>
-                        <h:panelGrid columns="2" cellpadding="5">
-                            <p:outputLabel for="Prénom" value="Date: " />
-                            <p:inputMask id="date" value="#{maskView.date}" mask="99/99/9999"/>
- 
-                            <p:outputLabel for="Nom" value="Phone:" />
-                            <p:inputMask id="phone" value="#{maskView.phone}" mask="(999) 999-9999"/>
- 
-                            <p:outputLabel for="Adresse" value="Phone with Ext:" />
-                            <p:inputMask id="phoneWithExt" value="#{maskView.phoneExt}" mask="(999) 999-9999? x99999"/>
- 
-                            <p:outputLabel for="Code Postal" value="Tax Id:" />
-                            <p:inputMask id="taxId" value="#{maskView.taxId}" mask="99-9999999"/>
-            
-                            <p:outputLabel for="Ville" value="SSN:" />
-                            <p:inputMask id="ssn" value="#{maskView.ssn}" mask="999-99-9999"/>
- 
-                            <p:outputLabel for="Login"  value="Product Key: " />
-                            <p:inputMask id="key" value="#{maskView.productKey}" mask="a*-999-a999"/>
-                            
-                            <p:outputLabel for="Mot de Passe"  value="Product Key: " />
-                            <p:inputMask id="key" value="#{maskView.productKey}" mask="a*-999-a999"/>
-                             
+                    <p:layoutUnit position="east" size="175" header="Left" collapsible="true">
+                        <p:menu>
+                            <p:submenu label="Resources">
+
+                                <p:menuitem value="Demo" url="http://www.primefaces.org/showcase-labs/ui/home.jsf" />
+                                <p:menuitem value="Documentation" url="http://www.primefaces.org/documentation.html" />
+                                <p:menuitem value="Forum" url="http://forum.primefaces.org/" />
+                                <p:menuitem value="Themes" url="http://www.primefaces.org/themes.html" />
+
+                            </p:submenu>
+
+                        </p:menu>
+                    </p:layoutUnit>
+
+                    <p:layoutUnit position="center">
+
+                        <h:panelGrid styleClass="panel_center" columns="2" cellpadding="5">
+                            <h:outputStylesheet name="Ecommerce.css" />
+                            <p:outputLabel for="prenom" value="Prénom: " />
+                            <p:inputMask id="prenom" value="#{Personne.prenom}" mask=""/>
+
+                            <p:outputLabel for="nom" value="Nom:" />
+                            <p:inputMask id="nom" value="#{Personne.nom}" mask=""/>
+
+                            <p:outputLabel for="adresse" value="Adresse:" />
+                            <p:inputMask id="adresse" value="#{Personne.adresse}" mask=""/>
+
+                            <p:outputLabel for="cdp" value="Code Postal" />
+                            <p:inputMask id="cdp" value="#{Personne.cdp}" mask="99999"/>
+
+                            <p:outputLabel for="ville" value="Ville:" />
+                            <p:inputMask id="ville" value="#{Personne.ville}" mask=""/>
+
+                            <p:outputLabel for="login"  value="Login : " />
+                            <p:inputMask id="login" value="#{Personne.login}" mask="a*-999-a999"/>
+
+                            <p:outputLabel for="mdp"  value="Mot de passe : " />
+                            <p:inputMask id="mdp" value="#{Personne.mdp}" mask="a*-999-a999"/>
+
                             <p:commandButton value="Reset" type="reset" />
                             <p:commandButton value="Submit" update="display" oncomplete="PF('dlg').show()"/>
+
                         </h:panelGrid>
- 
+
                         <p:dialog widgetVar="dlg" modal="true" resizable="false" header="Values" showEffect="fade"> 
                             <p:panelGrid id="display" columns="2" columnClasses="label,value">
-                                <h:outputText value="Prénom: " />
-                                <h:outputText id="dateValue" value="#{maskView.date}" />
- 
                                 <h:outputText value="Nom: " />
-                                <h:outputText id="phoneValue" value="#{maskView.phone}" />
- 
+                                <h:outputText id="nomValue" value="#{Personne.nom}" />
+
+                                <h:outputText value="Prénom: " />
+                                <h:outputText id="prenomValue" value="#{Personne.prenom}" />
+
                                 <h:outputText value="Adresse: " />
-                                <h:outputText id="phoneWithExtValue" value="#{maskView.phoneExt}"/>
- 
+                                <h:outputText id="adresseValue" value="#{Personne.adresse}"/>
+
                                 <h:outputText value="Code Postal: " />
-                                <h:outputText id="taxValue" value="#{maskView.taxId}" />
- 
+                                <h:outputText id="cdpValue" value="#{Personne.cdp}" />
+
                                 <h:outputText value="Ville: " />
-                                <h:outputText id="ssnValue" value="#{maskView.ssn}" />
- 
+                                <h:outputText id="villeValue" value="#{Personne.ville}" />
+
                                 <h:outputText value="Login: " />
-                                <h:outputText id="keyValue" value="#{maskView.productKey}" />
-                                
+                                <h:outputText id="loginValue" value="#{Personne.login}" />
+
                                 <h:outputText value="Mot de passe: " />
-                                <h:outputText id="keyValue" value="#{maskView.productKey}" />
+                                <h:outputText id="mdpValue" value="#{Personne.mdp}" />
                             </p:panelGrid>
                         </p:dialog>
-                    </h:form>
-                </p:layoutUnit>
 
-            </p:layout>
+                    </p:layoutUnit>
 
+                </p:layout>
+            </h:form>
         </h:body>
 
     </f:view>
 </html>
-    
+
