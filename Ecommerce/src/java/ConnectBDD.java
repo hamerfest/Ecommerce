@@ -43,7 +43,6 @@ public class ConnectBDD {
             System.out.println("Driver n'a pas été trouvé dans le classpath: " + e.getMessage() + ". Le driver n'a pas été chargé.\n");
             return false;
         }
-
     }
 
     public ResultSet getResultat() {
