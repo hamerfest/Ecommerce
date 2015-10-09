@@ -84,10 +84,10 @@
                             <p:inputMask id="ville" value="#{Personne.ville}" mask=""/>
 
                             <p:outputLabel for="login"  value="Login : " />
-                            <p:inputMask id="login" value="#{Personne.login}" mask="a*-999-a999"/>
+                            <p:inputMask id="login" value="#{Personne.login}" mask=""/>
 
                             <p:outputLabel for="mdp"  value="Mot de passe : " />
-                            <p:inputMask id="mdp" value="#{Personne.mdp}" mask="a*-999-a999"/>
+                            <p:inputMask id="mdp" value="#{Personne.mdp}" mask=""/>
 
                             <p:commandButton value="Reset" type="reset" />
                             <p:commandButton value="Submit" update="display" oncomplete="PF('dlg').show()"/>

@@ -17,7 +17,8 @@ and open the template in the editor.
 }
 
 html {
-    height: 100%
+    height: 100%;
+    width: 100%;
 }
 .panel_center{
     margin: 0 auto;
