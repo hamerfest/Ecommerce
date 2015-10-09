@@ -6,10 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
 
-/**
- *
- * @author Johanne
- */
+
 public class ConnectBDD {
 
     private Connection myConnexion;
@@ -77,14 +74,13 @@ public class ConnectBDD {
     }
 
     public void executeRequete(String requete, String[] values) throws SQLException {
-        PreparedStatement sqlrequete = preparePreparedStatement(requete, values);
+        String typeRequete = requete.substring(0,6);
         // TODO executeUpdate ==> retourne le résultat
         //executeQuery==> Executes the given SQL statement, which may be an INSERT, UPDATE, or DELETE statement or an SQL statement that returns nothing, such as an SQL DDL statement.
-        String typeRequete = requete.substring(0, 5);
         int size = 0;
-        if (typeRequete.toUpperCase() == "SELECT") {
+        if ("SELECT".equals(typeRequete.toUpperCase())) {
             try {
-                this.resultat = preparedStatement.executeQuery();
+                this.resultat = myStatement.executeQuery(requete);
                 if (resultat != null) {
                     resultat.last();
                     size = resultat.getRow();
@@ -94,7 +90,8 @@ public class ConnectBDD {
             } catch (SQLException e) {
                 System.out.println("Erreur lors de l'execution de la requete : " + e.getMessage());
             }
-        } else {
+        } else { /*UPDATE ou INSERT*/
+            PreparedStatement sqlrequete = preparePreparedStatement(requete, values);
             try {
                 size = preparedStatement.executeUpdate();
                 System.out.println("Requete executée : " + size + " action(s)");
