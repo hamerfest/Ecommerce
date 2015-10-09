@@ -7,17 +7,22 @@ and open the template in the editor.
     Created on : 18 sept. 2015, 11:24:02
     Author     : Matthieu
 */
+ body { 
+  color:black;
+  background-color: white;
+  background-image: url('Accueil.jpeg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+html {
+    height: 100%
+}
 .panel_center{
     margin: 0 auto;
 }
 
 .mainToolbar{
-    margin-top: 3%;
     background-color: blue;
-}
-
-.Accueil {
-    color:black;
-    background-color:white;
-    background-image:url(/Accueil.jpeg);
 }
