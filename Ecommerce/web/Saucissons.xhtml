@@ -4,7 +4,7 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui" xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
-   
+
     <f:view contentType="text/html">
         <h:head>
             <link rel="stylesheet" type="text/css" href="resources/Ecommerce.css" title="Ecommerce" />
@@ -20,18 +20,17 @@
 
                     <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
 
-
                         <p:growl id="messages" showDetail="true" />
 
                         <p:toolbar styleClass="mainToolbar">
-                        <h:outputStylesheet name="Ecommerce.css" />
-                        
+                            <h:outputStylesheet name="Ecommerce.css" />
+
                             <f:facet name="left">
-                                <p:commandButton type="button" value="Nos saucissons" icon="" />
+                                <p:commandButton ajax="false" value="Nos saucissons" icon="" action="Saucissons.xhtml?faces-redirect=true"  />
 
-                                <p:commandButton type="button" value="Nos fromages" icon="" />
+                                <p:commandButton ajax="false" value="Nos fromages" icon="" action="Fromages.xhtml?faces-redirect=true" />
 
-                                <p:commandButton type="button" value="Nos pâtés" icon="" />
+                                <p:commandButton ajax="false" value="Nos Pâtés" icon="" action="Pates.xhtml?faces-redirect=true" />
 
                             </f:facet>
 
@@ -56,7 +55,7 @@
 
                                 <p:menuitem value="Demo" url="http://www.primefaces.org/showcase-labs/ui/home.jsf" />
                                 <p:menuitem value="Documentation" url="http://www.primefaces.org/documentation.html" />
-                                <p:menuitem value="Forum" url="http://forum.primefaces.org/" />
+                                <p:menuitem value="Nouvel Utilisateur" url="http://localhost:8080/Ecommerce/faces/Connexion.xhtml" />
                                 <p:menuitem value="Themes" url="http://www.primefaces.org/themes.html" />
 
                             </p:submenu>
@@ -66,8 +65,31 @@
 
                     <p:layoutUnit position="center">
 
-                       
+                        <h:form id="form">
+                            <p:dataGrid var="car" value="#{dataGridView.cars}" columns="3" 
+                                        rows="12" paginator="true" id="cars"
+                                        paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                        rowsPerPageTemplate="6,12,16">
 
+                                <f:facet name="header">
+                                    Nos Saucissons
+                                </f:facet>
+
+                                <p:panel header="#{car.id}" style="text-align:center">
+                                    <h:panelGrid columns="1" style="width:100%">
+                                        <p:graphicImage name="demo/images/car/#{car.brand}.gif"/> 
+
+                                        <h:outputText value="#{car.year}" />
+
+                                        <p:commandLink update=":form:carDetail" oncomplete="PF('carDialog').show()" title="View Detail">
+                                            <h:outputText styleClass="ui-icon ui-icon-search" style="margin:0 auto;" />
+                                            <f:setPropertyActionListener value="#{car}" target="#{dataGridView.selectedCar}" />
+                                        </p:commandLink>
+                                    </h:panelGrid>
+                                </p:panel>
+
+                            </p:dataGrid>
+                        </h:form>
                     </p:layoutUnit>
 
                 </p:layout>

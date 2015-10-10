@@ -21,18 +21,17 @@
 
                     <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
 
-
                         <p:growl id="messages" showDetail="true" />
 
                         <p:toolbar styleClass="mainToolbar">
                         <h:outputStylesheet name="Ecommerce.css" />
                         
                             <f:facet name="left">
-                                <p:commandButton type="button" value="Nos saucissons" icon="" />
+                                <p:commandButton ajax="false" value="Nos saucissons" icon="" action="Saucissons.xhtml?faces-redirect=true"  />
 
-                                <p:commandButton type="button" value="Nos fromages" icon="" />
+                                <p:commandButton ajax="false" value="Nos fromages" icon="" action="Fromages.xhtml?faces-redirect=true" />
 
-                                <p:commandButton type="button" value="Nos pâtés" icon="" />
+                                <p:commandButton ajax="false" value="Nos Pâtés" icon="" action="Pates.xhtml?faces-redirect=true" />
 
                             </f:facet>
 
@@ -43,7 +42,6 @@
                             </f:facet>
 
                         </p:toolbar>
-
 
                     </p:layoutUnit>
 

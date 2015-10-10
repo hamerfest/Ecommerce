@@ -27,11 +27,11 @@
                         <h:outputStylesheet name="Ecommerce.css" />
                         
                             <f:facet name="left">
-                                <p:commandButton  value="Nos saucissons" icon="" process="find"  action="findSaucissons.xhtml?faces-redirect=true" />
+                               <p:commandButton ajax="false" value="Nos saucissons" icon="" action="Saucissons.xhtml?faces-redirect=true"  />
 
-                                <p:commandButton type="button" value="Nos fromages" icon="" />
+                                <p:commandButton ajax="false" value="Nos fromages" icon="" action="Fromages.xhtml?faces-redirect=true" />
 
-                                <p:commandButton type="button" value="Nos pâtés" icon="" />
+                                <p:commandButton ajax="false" value="Nos Pâtés" icon="" action="Pates.xhtml?faces-redirect=true" />
 
                             </f:facet>
 
@@ -56,7 +56,7 @@
 
                                 <p:menuitem value="Demo" url="http://www.primefaces.org/showcase-labs/ui/home.jsf" />
                                 <p:menuitem value="Documentation" url="http://www.primefaces.org/documentation.html" />
-                                <p:menuitem value="Forum" url="http://forum.primefaces.org/" />
+                                <p:menuitem value="Nouvel Utilisateur" url="http://localhost:8080/Ecommerce/faces/Connexion.xhtml" />
                                 <p:menuitem value="Themes" url="http://www.primefaces.org/themes.html" />
 
                             </p:submenu>
