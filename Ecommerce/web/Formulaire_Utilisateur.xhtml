@@ -10,7 +10,7 @@
             <link rel="stylesheet" type="text/css" href="resources/Ecommerce.css" title="Ecommerce" />
             <f:facet name="first">
                 <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
-                <title>Connexion</title>
+                <title>Formulaire nouveau compte</title>
             </f:facet>
         </h:head>
 
@@ -50,7 +50,7 @@
                         Footer
                     </p:layoutUnit>
 
-                    <p:layoutUnit position="east" size="175" header="Menu" collapsible="false">
+                   <p:layoutUnit position="east" size="175" header="Menu" collapsible="false">
                         <p:menu>
                             
                                 <p:menuitem value="Demo" url="http://www.primefaces.org/showcase-labs/ui/home.jsf" />
@@ -62,28 +62,52 @@
                     </p:layoutUnit>
 
                     <p:layoutUnit position="center">
-                        
-                        <div style="text-align: center;>
-                            Connectez-vous !
-                        </div>
 
                         <h:panelGrid styleClass="panel_center" columns="2" cellpadding="5">
                             <h:outputStylesheet name="Ecommerce.css" />
-                            
+                            <p:outputLabel for="prenom" value="Prénom: " />
+                            <p:inputMask id="prenom" value="#{Personne.prenom}" mask=""/>
+
+                            <p:outputLabel for="nom" value="Nom:" />
+                            <p:inputMask id="nom" value="#{Personne.nom}" mask=""/>
+
+                            <p:outputLabel for="adresse" value="Adresse:" />
+                            <p:inputMask id="adresse" value="#{Personne.adresse}" mask=""/>
+
+                            <p:outputLabel for="cdp" value="Code Postal" />
+                            <p:inputMask id="cdp" value="#{Personne.cdp}" mask="99999"/>
+
+                            <p:outputLabel for="ville" value="Ville:" />
+                            <p:inputMask id="ville" value="#{Personne.ville}" mask=""/>
+
                             <p:outputLabel for="login"  value="Login : " />
                             <p:inputMask id="login" value="#{Personne.login}" mask=""/>
 
                             <p:outputLabel for="mdp"  value="Mot de passe : " />
                             <p:inputMask id="mdp" value="#{Personne.mdp}" mask=""/>
 
-                            <p:commandButton value="Reset" type="reset" />
-                            <p:commandButton value="Submit" update="display" oncomplete="PF('dlg').show()"/>
+                            <p:commandButton value="Reset" type="reset" styleClass="commandButton" />
+                            <p:commandButton value="Submit" update="display" styleClass="commandButton" oncomplete="PF('dlg').show()"/>
 
                         </h:panelGrid>
 
                         <p:dialog widgetVar="dlg" modal="true" resizable="false" header="Values" showEffect="fade"> 
                             <p:panelGrid id="display" columns="2" columnClasses="label,value">
-                                
+                                <h:outputText value="Nom: " />
+                                <h:outputText id="nomValue" value="#{Personne.nom}" />
+
+                                <h:outputText value="Prénom: " />
+                                <h:outputText id="prenomValue" value="#{Personne.prenom}" />
+
+                                <h:outputText value="Adresse: " />
+                                <h:outputText id="adresseValue" value="#{Personne.adresse}"/>
+
+                                <h:outputText value="Code Postal: " />
+                                <h:outputText id="cdpValue" value="#{Personne.cdp}" />
+
+                                <h:outputText value="Ville: " />
+                                <h:outputText id="villeValue" value="#{Personne.ville}" />
+
                                 <h:outputText value="Login: " />
                                 <h:outputText id="loginValue" value="#{Personne.login}" />
 
@@ -100,3 +124,4 @@
 
     </f:view>
 </html>
+
