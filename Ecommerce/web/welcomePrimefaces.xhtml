@@ -16,45 +16,34 @@
 
         <h:body>
             <h:form> 
-                <p:layout fullPage="true">
+                <p:layout fullPage="true" >
                     <h:outputStylesheet name="Ecommerce.css" />
 
-                    <p:layoutUnit position="north" size="150" resizable="false" closable="false" collapsible="false">
+                    <p:layoutUnit  position="north" size="150" styleClass="layoutNorth" resizable="false" closable="false" collapsible="false" >
 
-                        <img src="resources/J2EE.png" width="150" height="65" vertical-align="top" margin-left="5" />
-
+                        <img src="resources/J2EE.png" width="150" height="65" vertical-align="top" margin-left="5" />                        
+                        
                         <p:inputText style="margin-left: 29%;
                                      margin-bottom: 1%;
                                      margin-top: 1%;
-                                     vertical-align: top"/> 
+                                     vertical-align: top" placeholder="Rechercher"/> 
 
                         <p:commandButton value="Rechercher" update="" icon="ui-icon-search" styleClass="commandButton" />
 
                         <p:growl id="messages" showDetail="true" />
 
-                        <p:toolbar styleClass="mainToolbar">
-                            <h:outputStylesheet name="Ecommerce.css" />
+                        <p:menubar styleClass="menu">
+                            <p:menuitem value="Nos Saucissons" url="http://localhost:8080/Ecommerce/faces/Saucissons.xhtml"/>
+                                                      
+                            <p:menuitem value="Nos Fromages" url="http://localhost:8080/Ecommerce/faces/Fromages.xhtml"/>
+                            
+                            <p:menuitem value="Nos Pâtés" url="http://localhost:8080/Ecommerce/faces/Pates.xhtml"/>
 
-                            <f:facet name="left">
-                                <p:commandButton ajax="false" value="Nos saucissons" icon="" action="Saucissons.xhtml?faces-redirect=true"  />
-
-                                <p:commandButton ajax="false" value="Nos fromages" icon="" action="Fromages.xhtml?faces-redirect=true" />
-
-                                <p:commandButton ajax="false" value="Nos Pâtés" icon="" action="Pates.xhtml?faces-redirect=true" />
-
-                            </f:facet>
-
-                            <f:facet name="right">
-                                <p:menuButton value="Options">
-                                    <p:menuitem value="Homepage" url="http://localhost:8080/Ecommerce/" icon="ui-icon-extlink" />
-                                </p:menuButton>
-                            </f:facet>
-
-                        </p:toolbar>
-
+                        </p:menubar>
+                        
                     </p:layoutUnit>
 
-                    <p:layoutUnit position="south" size="50" closable="true" collapsible="true">
+                    <p:layoutUnit styleClass="layoutSouth" position="south" size="50" closable="true" collapsible="true">
                         Footer
                     </p:layoutUnit>
 
@@ -67,6 +56,11 @@
                             <p:menuitem value="Themes" url="http://www.primefaces.org/themes.html" />
 
                         </p:menu>
+
+                        <p:menuButton value="Options" style="margin-top: 2%; ">
+                            <p:menuitem value="Homepage" url="http://localhost:8080/Ecommerce/" icon="ui-icon-extlink" />
+                        </p:menuButton>
+
                     </p:layoutUnit>
 
                     <p:layoutUnit position="center">

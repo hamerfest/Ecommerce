@@ -9,7 +9,7 @@ and open the template in the editor.
 */
  body { 
   color:black;
-  background-color: white;
+  background-color: gainsboro;
   background-image: url('Accueil.jpeg');
   background-size: cover;
   background-repeat: no-repeat;
@@ -26,10 +26,48 @@ html {
 
 .mainToolbar{
     background-color: orange;
-     
 }
 
 .commandButton{
     vertical-align: top;
     margin-top: 1%;
+}
+
+.layoutNorth .ui-layout-unit {
+    background: gainsboro;
+}
+
+
+.layoutSouth .ui-layout-unit-content{
+    background-color: gainsboro;
+    background-repeat: repeat;
+}
+
+.commandButton1 {
+    margin-left: 50%;
+}
+
+.centeredMenuBar .ui-menubar {
+    text-align: center;
+}
+
+div.menu{
+text-align: center;
+}
+.menu div.ui-menubar {
+text-align: center;
+}
+.menu .ui-menu-list{
+width:99%;
+display: inline-flex;
+
+}
+div.menu>ul.ui-menu-list>li>a{
+width: 99%;
+}
+div.menu>ul.ui-menu-list>li{
+width: 99%;
+}
+.ui-menuitem-text{
+float: none!important;
 }
