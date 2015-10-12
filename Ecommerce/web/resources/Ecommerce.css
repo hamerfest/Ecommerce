@@ -26,4 +26,10 @@ html {
 
 .mainToolbar{
     background-color: blue;
+     
+}
+
+.commandButton{
+    vertical-align: top;
+    margin-top: 1%;
 }
