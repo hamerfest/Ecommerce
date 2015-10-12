@@ -70,31 +70,32 @@
                         <h:panelGrid styleClass="panel_center" columns="2" cellpadding="5">
                             <h:outputStylesheet name="Ecommerce.css" />
                             <p:outputLabel for="prenom" value="Prénom: " />
-                            <p:inputMask id="prenom" value="#{personne.prenom}" mask=""/>
+                            <p:inputMask id="prenom" value="#{personne.prenom}" required="true" mask=""/>
 
                             <p:outputLabel for="nom" value="Nom:" />
-                            <p:inputMask id="nom" value="#{personne.nom}" mask=""/>
+                            <p:inputMask id="nom" value="#{personne.nom}" required="true" mask=""/>
 
                             <p:outputLabel for="adresse" value="Adresse:" />
-                            <p:inputMask id="adresse" value="#{personne.adresse}" mask=""/>
+                            <p:inputMask id="adresse" value="#{personne.adresse}" required="true" mask=""/>
 
                             <p:outputLabel for="cdp" value="Code Postal" />
-                            <p:inputMask id="cdp" value="#{personne.cdp}" mask="99999"/>
+                            <p:inputMask id="cdp" value="#{personne.cdp}" required="true" mask="99999"/>
 
                             <p:outputLabel for="ville" value="Ville:" />
-                            <p:inputMask id="ville" value="#{personne.ville}" mask=""/>
+                            <p:inputMask id="ville" value="#{personne.ville}" required="true" mask=""/>
 
                             <p:outputLabel for="login"  value="Login : " />
-                            <p:inputMask id="login" value="#{personne.login}" mask=""/>
+                            <p:inputMask id="login" value="#{personne.login}" required="true" mask=""/>
 
                             <p:outputLabel for="mdp"  value="Mot de passe : " />
-                            <p:inputMask id="mdp" value="#{personne.mdp}" mask=""/>
+                            <p:inputMask id="mdp" value="#{personne.mdp}" required="true" mask=""/>
 
                             <p:commandButton value="Reset" type="reset" styleClass="commandButton" />
-                            <p:commandButton value="Submit" update="display" action="#{personne.savePersonne()}" styleClass="commandButton" oncomplete="PF('dlg').show()"/>
+                            <p:commandButton value="Submit" action="#{personne.savePersonne()}" styleClass="commandButton" />
+                                             <!--update="display"  oncomplete="PF('dlg').show()"/>-->
 
                         </h:panelGrid>
-
+<!--
                         <p:dialog widgetVar="dlg" modal="true" resizable="false" header="Values" showEffect="fade"> 
                             <p:panelGrid id="display" columns="2" columnClasses="label,value">
                                 <h:outputText value="Nom: " />
@@ -118,7 +119,7 @@
                                 <h:outputText value="Mot de passe: " />
                                 <h:outputText id="mdpValue" value="#{personne.mdp}" />
                             </p:panelGrid>
-                        </p:dialog>
+                        </p:dialog>-->
 
                     </p:layoutUnit>
 

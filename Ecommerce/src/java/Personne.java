@@ -5,10 +5,12 @@
  */
 
  
+import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
  
 @ManagedBean
-public class Personne {
+public class Personne implements Serializable{
     private String nom;
     private String prenom;
     private String adresse;
@@ -22,14 +24,12 @@ public class Personne {
     Par defaut fonction = "Client"
      */
     public void savePersonne() throws InstantiationException, IllegalAccessException {
-
         String[] param ={this.login,this.mdp,this.nom,this.prenom,this.adresse,this.cdp,this.ville,"CLIENT"};
         ConnectBDD b = new ConnectBDD();
         try {
-            b.preparePreparedStatement("INSERT INTO ecommerce.personne"
+            b.executeRequete("INSERT INTO ecommerce.personne"
                     + "(id_personne,login,mdp,nom, prenom,adresse,cdp, ville, fonction)"
                     + "VALUES (NULL,?,?,?,?,?,?,?,?)",param);
-            System.out.println("Sauvegarde réussie");
         } catch (Exception e) {
             System.out.println("Erreur lors de la sauvegarde");
             System.out.println(e.getMessage());
