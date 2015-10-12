@@ -23,6 +23,7 @@
                         <p:inputText style="margin-left: 40%;
                                      margin-bottom: 1%;"/> 
                         
+                        <p:commandButton value="Rechercher" update="" icon="ui-icon-search" />                     
                         
                         <p:growl id="messages" showDetail="true" />
 
@@ -69,25 +70,25 @@
                         <h:panelGrid styleClass="panel_center" columns="2" cellpadding="5">
                             <h:outputStylesheet name="Ecommerce.css" />
                             <p:outputLabel for="prenom" value="Prénom: " />
-                            <p:inputMask id="prenom" value="#{Personne.prenom}" mask=""/>
+                            <p:inputMask id="prenom" value="#{personne.prenom}" mask=""/>
 
                             <p:outputLabel for="nom" value="Nom:" />
-                            <p:inputMask id="nom" value="#{Personne.nom}" mask=""/>
+                            <p:inputMask id="nom" value="#{personne.nom}" mask=""/>
 
                             <p:outputLabel for="adresse" value="Adresse:" />
-                            <p:inputMask id="adresse" value="#{Personne.adresse}" mask=""/>
+                            <p:inputMask id="adresse" value="#{personne.adresse}" mask=""/>
 
                             <p:outputLabel for="cdp" value="Code Postal" />
-                            <p:inputMask id="cdp" value="#{Personne.cdp}" mask="99999"/>
+                            <p:inputMask id="cdp" value="#{personne.cdp}" mask="99999"/>
 
                             <p:outputLabel for="ville" value="Ville:" />
-                            <p:inputMask id="ville" value="#{Personne.ville}" mask=""/>
+                            <p:inputMask id="ville" value="#{personne.ville}" mask=""/>
 
                             <p:outputLabel for="login"  value="Login : " />
-                            <p:inputMask id="login" value="#{Personne.login}" mask=""/>
+                            <p:inputMask id="login" value="#{personne.login}" mask=""/>
 
                             <p:outputLabel for="mdp"  value="Mot de passe : " />
-                            <p:inputMask id="mdp" value="#{Personne.mdp}" mask=""/>
+                            <p:inputMask id="mdp" value="#{personne.mdp}" mask=""/>
 
                             <p:commandButton value="Reset" type="reset" styleClass="commandButton" />
                             <p:commandButton value="Submit" update="display" styleClass="commandButton" oncomplete="PF('dlg').show()"/>
@@ -97,25 +98,25 @@
                         <p:dialog widgetVar="dlg" modal="true" resizable="false" header="Values" showEffect="fade"> 
                             <p:panelGrid id="display" columns="2" columnClasses="label,value">
                                 <h:outputText value="Nom: " />
-                                <h:outputText id="nomValue" value="#{Personne.nom}" />
+                                <h:outputText id="nomValue" value="#{personne.nom}" />
 
                                 <h:outputText value="Prénom: " />
-                                <h:outputText id="prenomValue" value="#{Personne.prenom}" />
+                                <h:outputText id="prenomValue" value="#{personne.prenom}" />
 
                                 <h:outputText value="Adresse: " />
-                                <h:outputText id="adresseValue" value="#{Personne.adresse}"/>
+                                <h:outputText id="adresseValue" value="#{personne.adresse}"/>
 
                                 <h:outputText value="Code Postal: " />
-                                <h:outputText id="cdpValue" value="#{Personne.cdp}" />
+                                <h:outputText id="cdpValue" value="#{personne.cdp}" />
 
                                 <h:outputText value="Ville: " />
-                                <h:outputText id="villeValue" value="#{Personne.ville}" />
+                                <h:outputText id="villeValue" value="#{personne.ville}" />
 
                                 <h:outputText value="Login: " />
-                                <h:outputText id="loginValue" value="#{Personne.login}" />
+                                <h:outputText id="loginValue" value="#{personne.login}" />
 
                                 <h:outputText value="Mot de passe: " />
-                                <h:outputText id="mdpValue" value="#{Personne.mdp}" />
+                                <h:outputText id="mdpValue" value="#{personne.mdp}" />
                             </p:panelGrid>
                         </p:dialog>
 

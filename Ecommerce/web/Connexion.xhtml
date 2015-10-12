@@ -19,7 +19,11 @@
                 <p:layout fullPage="true">
 
                     <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
-
+                        
+                        <p:inputText style="margin-left: 40%;
+                                     margin-bottom: 1%;"/> 
+                        
+                        <p:commandButton value="Rechercher" update="" icon="ui-icon-search" />
 
                         <p:growl id="messages" showDetail="true" />
 
@@ -71,10 +75,10 @@
                             <h:outputStylesheet name="Ecommerce.css" />
                             
                             <p:outputLabel for="login"  value="Login : " />
-                            <p:inputMask id="login" value="#{Personne.login}" mask=""/>
+                            <p:inputMask id="login" value="#{personne.login}" mask=""/>
 
                             <p:outputLabel for="mdp"  value="Mot de passe : " />
-                            <p:inputMask id="mdp" value="#{Personne.mdp}" mask=""/>
+                            <p:inputMask id="mdp" value="#{personne.mdp}" mask=""/>
 
                             <p:commandButton value="Reset" type="reset" />
                             <p:commandButton value="Submit" update="display" oncomplete="PF('dlg').show()"/>

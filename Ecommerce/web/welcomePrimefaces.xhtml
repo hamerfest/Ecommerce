@@ -19,8 +19,13 @@
                 <p:layout fullPage="true">
                     <h:outputStylesheet name="Ecommerce.css" />
 
-                    <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
+                    <p:layoutUnit position="north" size="125" resizable="false" closable="false" collapsible="false">
 
+                        <p:inputText style="margin-left: 40%;
+                                     margin-bottom: 1%;"/> 
+                        
+                        <p:commandButton value="Rechercher" update="" icon="ui-icon-search" />
+                        
                         <p:growl id="messages" showDetail="true" />
 
                         <p:toolbar styleClass="mainToolbar">
