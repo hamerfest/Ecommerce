@@ -16,7 +16,27 @@ public class Personne {
     private String ville;
     private String login;
     private String mdp; 
+    
+    /*
+     Save Personne into dataBase
+    Par defaut fonction = "Client"
+     */
+    public void savePersonne() throws InstantiationException, IllegalAccessException {
 
+        String[] param ={this.login,this.mdp,this.nom,this.prenom,this.adresse,this.cdp,this.ville,"CLIENT"};
+        ConnectBDD b = new ConnectBDD();
+        try {
+            b.preparePreparedStatement("INSERT INTO ecommerce.personne"
+                    + "(id_personne,login,mdp,nom, prenom,adresse,cdp, ville, fonction)"
+                    + "VALUES (NULL,?,?,?,?,?,?,?,?)",param);
+            System.out.println("Sauvegarde réussie");
+        } catch (Exception e) {
+            System.out.println("Erreur lors de la sauvegarde");
+            System.out.println(e.getMessage());
+        }
+
+    }
+    
     public String getNom() {
         return nom;
     }
