@@ -18,13 +18,17 @@
             <h:form>
                 <p:layout fullPage="true">
 
-                    <p:layoutUnit position="north" size="125" resizable="false" closable="false" collapsible="false">
+                    <p:layoutUnit position="north" size="150" resizable="false" closable="false" collapsible="false">
 
-                        <p:inputText style="margin-left: 40%;
-                                     margin-bottom: 1%;"/> 
-                        
-                        <p:commandButton value="Rechercher" update="" icon="ui-icon-search" />
-                        
+                        <img src="resources/J2EE.png" width="150" height="65" vertical-align="top" margin-left="5" />
+
+                        <p:inputText style="margin-left: 29%;
+                                     margin-bottom: 1%;
+                                     margin-top: 1%;
+                                     vertical-align: top"/> 
+
+                        <p:commandButton value="Rechercher" update="" icon="ui-icon-search" styleClass="commandButton" />
+
                         <p:growl id="messages" showDetail="true" />
 
                         <p:toolbar styleClass="mainToolbar">
@@ -56,11 +60,11 @@
 
                     <p:layoutUnit position="east" size="175" header="Menu" collapsible="false">
                         <p:menu>
-                            
-                                <p:menuitem value="Demo" url="http://www.primefaces.org/showcase-labs/ui/home.jsf" />
-                                <p:menuitem value="Connexion" url="http://localhost:8080/Ecommerce/faces/Connexion.xhtml" />
-                                <p:menuitem value="Nouvel Utilisateur" url="http://localhost:8080/Ecommerce/faces/Formulaire_Utilisateur.xhtml" />
-                                <p:menuitem value="Themes" url="http://www.primefaces.org/themes.html" />
+
+                            <p:menuitem value="Panier" url="http://www.primefaces.org/showcase-labs/ui/home.jsf" />
+                            <p:menuitem value="Connexion" url="http://localhost:8080/Ecommerce/faces/Connexion.xhtml" />
+                            <p:menuitem value="Nouvel Utilisateur" url="http://localhost:8080/Ecommerce/faces/Formulaire_Utilisateur.xhtml" />
+                            <p:menuitem value="Themes" url="http://www.primefaces.org/themes.html" />
 
                         </p:menu>
                     </p:layoutUnit>
