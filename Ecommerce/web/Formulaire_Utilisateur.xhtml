@@ -91,7 +91,7 @@
                             <p:inputMask id="mdp" value="#{personne.mdp}" mask=""/>
 
                             <p:commandButton value="Reset" type="reset" styleClass="commandButton" />
-                            <p:commandButton value="Submit" update="display" styleClass="commandButton" oncomplete="PF('dlg').show()"/>
+                            <p:commandButton value="Submit" update="display" action="#{personne.savePersonne()}" styleClass="commandButton" oncomplete="PF('dlg').show()"/>
 
                         </h:panelGrid>
 
