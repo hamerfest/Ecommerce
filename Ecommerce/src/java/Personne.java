@@ -10,6 +10,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
+import javax.faces.application.FacesMessage;
+import org.primefaces.context.RequestContext;
 
 import javax.faces.bean.ManagedBean;
  
@@ -33,19 +37,26 @@ public class Personne implements Serializable{
         if (!testBDDLogin(this.login)){
         String[] paramInsert ={this.login,this.mdp,this.nom,this.prenom,this.adresse,this.cdp,this.ville,"CLIENT"};
         String requeteInsert = "INSERT INTO ecommerce.personne"
-                    + "(id_personne,login,mdp,nom, prenom,adresse,cdp, ville, fonction)"
+                    + "(id_personne,login,mdp,nom, prenom,adresse,cdp, ville,fonction)"
                     + "VALUES (NULL,?,?,?,?,?,?,?,?)";
         ConnectBDD b = new ConnectBDD();
         try {
             b.executeRequete(requeteInsert,paramInsert);
+            FacesContext.getCurrentInstance().addMessage("msg", new FacesMessage(FacesMessage.SEVERITY_INFO,"Info","Sauvegarde Réussie"));
         } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage("msg", new FacesMessage(FacesMessage.SEVERITY_FATAL, "Fatal!", "System Error : Sauvegarde Echouée"));
             System.out.println("Erreur lors de la sauvegarde");
             System.out.println(e.getMessage());
         }
+        
         b.closeConnect();
         }
-        else System.out.println("Erreur login en doublon");
-        /*clear();*/
+        else{ 
+            FacesContext.getCurrentInstance().addMessage("msg",new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning!", "Le login choisi est déjà utilisé"));
+            System.out.println("Erreur login en doublon");
+            FacesContext.getCurrentInstance().addMessage("login",new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning!", "Veuillez en inscrire un autre login"));
+        }
+        clear();
 
     }
     
@@ -122,11 +133,14 @@ public class Personne implements Serializable{
     true ==> exist else false*/
     public boolean testBDDLogin(String login) throws InstantiationException, IllegalAccessException, SQLException{
         String[] paramTest = {"login ="+login};
-        String requeteTest = "SELECT count(*) FROM  ecommerce.personne WHERE ?";
-        ConnectBDD b = new ConnectBDD();
-        b.executeRequete(requeteTest,paramTest);
-        ResultSet res = b.getResultat();
-        return res.getInt(1)>=1;
+        String requeteTest = "SELECT count(*) FROM  ecommerce.personne WHERE login='"+login+"'";
+        ConnectBDD c = new ConnectBDD();
+        c.executeRequete(requeteTest,paramTest);
+        ResultSet res = c.getResultat();
+        while (res.next()){
+            return (res.getInt(1)>=1);
+        }
+        return false;
     }
 
     public String getMdp() {

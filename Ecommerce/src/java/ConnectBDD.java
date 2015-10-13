@@ -75,10 +75,12 @@ public class ConnectBDD {
 
     public void executeRequete(String requete, String[] values) throws SQLException {
         String typeRequete = requete.substring(0,6);
+        System.out.println("Type de requete :"+typeRequete);
         // TODO executeUpdate ==> retourne le résultat
         //executeQuery==> Executes the given SQL statement, which may be an INSERT, UPDATE, or DELETE statement or an SQL statement that returns nothing, such as an SQL DDL statement.
         int size = 0;
         if ("SELECT".equals(typeRequete.toUpperCase())) {
+            System.out.println("Traitement requete SELECT");
             try {
                 this.resultat = myStatement.executeQuery(requete);
                 if (resultat != null) {
@@ -91,6 +93,7 @@ public class ConnectBDD {
                 System.out.println("Erreur lors de l'execution de la requete : " + e.getMessage());
             }
         } else { /*UPDATE ou INSERT*/
+            System.out.println("Traitement requete UPDATE or INSERT");
             PreparedStatement sqlrequete = preparePreparedStatement(requete, values);
             try {
                 size = preparedStatement.executeUpdate();

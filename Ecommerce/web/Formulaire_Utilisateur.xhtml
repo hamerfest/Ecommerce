@@ -21,102 +21,112 @@
                     <p:layoutUnit position="north" size="150" resizable="false" closable="false" collapsible="false">
 
                         <img src="resources/J2EE.png" width="150" height="65" vertical-align="top" margin-left="5" />
-                         
+
                         <p:inputText style="margin-left: 29%;
                                      margin-bottom: 1%;
                                      margin-top: 1%;
                                      vertical-align: top"/> 
-                        
+
                         <p:commandButton value="Rechercher" update="" icon="ui-icon-search" styleClass="commandButton" />                     
-                        
+
                         <p:growl id="messages" showDetail="true" />
 
                         <p:menubar styleClass="menu">
                             <p:menuitem value="Nos Saucissons" url="http://localhost:8080/Ecommerce/faces/Saucissons.xhtml"/>
-                                                      
+
                             <p:menuitem value="Nos Fromages" url="http://localhost:8080/Ecommerce/faces/Fromages.xhtml"/>
-                            
+
                             <p:menuitem value="Nos Pâtés" url="http://localhost:8080/Ecommerce/faces/Pates.xhtml"/>
 
                         </p:menubar>
 
                     </p:layoutUnit>
 
-                   <p:layoutUnit position="east" size="175" header="Menu" collapsible="false">
+                    <p:layoutUnit position="east" size="175" header="Menu" collapsible="false">
                         <p:menu>
-                            
-                                <p:menuitem value="Panier" url="http://www.primefaces.org/showcase-labs/ui/home.jsf" />
-                                <p:menuitem value="Connexion" url="http://localhost:8080/Ecommerce/faces/Connexion.xhtml" />
-                                <p:menuitem value="Nouvel Utilisateur" url="http://localhost:8080/Ecommerce/faces/Formulaire_Utilisateur.xhtml" />
-                                <p:menuitem value="Themes" url="http://www.primefaces.org/themes.html" />
-                                <p:menuitem value="Test Utilisateur" url="http://localhost:8080/Ecommerce/faces/Utilisateur.xhtml" />
+
+                            <p:menuitem value="Panier" url="http://www.primefaces.org/showcase-labs/ui/home.jsf" />
+                            <p:menuitem value="Connexion" url="http://localhost:8080/Ecommerce/faces/Connexion.xhtml" />
+                            <p:menuitem value="Nouvel Utilisateur" url="http://localhost:8080/Ecommerce/faces/Formulaire_Utilisateur.xhtml" />
+                            <p:menuitem value="Themes" url="http://www.primefaces.org/themes.html" />
+                            <p:menuitem value="Test Utilisateur" url="http://localhost:8080/Ecommerce/faces/Utilisateur.xhtml" />
                         </p:menu>
-                       
+
                         <p:menuButton value="Options" style="margin-top: 2%; ">
                             <p:menuitem value="Homepage" url="http://localhost:8080/Ecommerce/" icon="ui-icon-extlink" />
                         </p:menuButton>
 
-                   </p:layoutUnit>
+                    </p:layoutUnit>
 
                     <p:layoutUnit position="center">
-                        
                         <div style="text-align: center">
                             Formulaire de nouvel utilisateur !
                         </div>
                         
-                        <h:panelGrid styleClass="panel_center" columns="2" cellpadding="5">
-                            <h:outputStylesheet name="Ecommerce.css" />
-                            <p:outputLabel for="prenom" value="Prénom: " />
-                            <p:inputMask id="prenom" value="#{personne.prenom}" required="true" mask=""/>
+                        <p:separator />
+                        <h:form>
+                            <p:messages id="msg" showDetail="false" autoUpdate="true" closable="true" />
+                            <h:panelGrid id="formUser" styleClass="panel_center" columns="3" cellpadding="5">
+                                <h:outputStylesheet name="Ecommerce.css" />
+                                <p:outputLabel for="prenom" value="Prénom: " />
+                                <p:inputMask id="prenom" value="#{personne.prenom}" required="true" mask=""/>
+                                <p:message for="prenom" />
 
-                            <p:outputLabel for="nom" value="Nom:" />
-                            <p:inputMask id="nom" value="#{personne.nom}" required="true" mask=""/>
+                                <p:outputLabel for="nom" value="Nom:" />
+                                <p:inputMask id="nom" value="#{personne.nom}" required="true" mask=""/>
+                                <p:message for="nom" />
+                                
+                                <p:outputLabel for="adresse" value="Adresse:" />
+                                <p:inputMask id="adresse" value="#{personne.adresse}" required="true" mask=""/>
+                                <p:message for="adresse" />
+                                
+                                <p:outputLabel for="cdp" value="Code Postal" />
+                                <p:inputMask id="cdp" value="#{personne.cdp}" required="true" mask="99999"/>
+                                <p:message for="cdp" />
+                                
+                                <p:outputLabel for="ville" value="Ville:" />
+                                <p:inputMask id="ville" value="#{personne.ville}" required="true" mask=""/>
+                                <p:message for="ville" />
+                                
+                                <p:outputLabel for="login"  value="Login : " />
+                                <p:inputMask id="login" value="#{personne.login}" required="true" mask=""/>
+                                <p:message for="login" />
+                                
+                                <p:outputLabel for="mdp"  value="Mot de passe : " />
+                                <p:password id="mdp" value="#{personne.mdp}" required="true" mask=""/>
+                                <p:message for="mdp" />
+                                
+                                <p:commandButton value="Réinitialiser" type="reset" styleClass="commandButton" />
+                                <p:commandButton update="formUser" value="Enregistrer" actionListener="#{personne.savePersonne}" styleClass="commandButton" />
+                                <!--update="display"  oncomplete="PF('dlg').show()"/>-->
 
-                            <p:outputLabel for="adresse" value="Adresse:" />
-                            <p:inputMask id="adresse" value="#{personne.adresse}" required="true" mask=""/>
-
-                            <p:outputLabel for="cdp" value="Code Postal" />
-                            <p:inputMask id="cdp" value="#{personne.cdp}" required="true" mask="99999"/>
-
-                            <p:outputLabel for="ville" value="Ville:" />
-                            <p:inputMask id="ville" value="#{personne.ville}" required="true" mask=""/>
-
-                            <p:outputLabel for="login"  value="Login : " />
-                            <p:inputMask id="login" value="#{personne.login}" required="true" mask=""/>
-
-                            <p:outputLabel for="mdp"  value="Mot de passe : " />
-                            <p:inputMask id="mdp" value="#{personne.mdp}" required="true" mask=""/>
-
-                            <p:commandButton value="Reset" type="reset" styleClass="commandButton" />
-                            <p:commandButton value="Submit" action="#{personne.savePersonne()}" styleClass="commandButton" />
-                                             <!--update="display"  oncomplete="PF('dlg').show()"/>-->
-
-                        </h:panelGrid>
-<!--
-                        <p:dialog widgetVar="dlg" modal="true" resizable="false" header="Values" showEffect="fade"> 
-                            <p:panelGrid id="display" columns="2" columnClasses="label,value">
-                                <h:outputText value="Nom: " />
-                                <h:outputText id="nomValue" value="#{personne.nom}" />
-
-                                <h:outputText value="Prénom: " />
-                                <h:outputText id="prenomValue" value="#{personne.prenom}" />
-
-                                <h:outputText value="Adresse: " />
-                                <h:outputText id="adresseValue" value="#{personne.adresse}"/>
-
-                                <h:outputText value="Code Postal: " />
-                                <h:outputText id="cdpValue" value="#{personne.cdp}" />
-
-                                <h:outputText value="Ville: " />
-                                <h:outputText id="villeValue" value="#{personne.ville}" />
-
-                                <h:outputText value="Login: " />
-                                <h:outputText id="loginValue" value="#{personne.login}" />
-
-                                <h:outputText value="Mot de passe: " />
-                                <h:outputText id="mdpValue" value="#{personne.mdp}" />
-                            </p:panelGrid>
-                        </p:dialog>-->
+                            </h:panelGrid>
+                        </h:form>
+                        <!--
+                                                <p:dialog widgetVar="dlg" modal="true" resizable="false" header="Values" showEffect="fade"> 
+                                                    <p:panelGrid id="display" columns="2" columnClasses="label,value">
+                                                        <h:outputText value="Nom: " />
+                                                        <h:outputText id="nomValue" value="#{personne.nom}" />
+                        
+                                                        <h:outputText value="Prénom: " />
+                                                        <h:outputText id="prenomValue" value="#{personne.prenom}" />
+                        
+                                                        <h:outputText value="Adresse: " />
+                                                        <h:outputText id="adresseValue" value="#{personne.adresse}"/>
+                        
+                                                        <h:outputText value="Code Postal: " />
+                                                        <h:outputText id="cdpValue" value="#{personne.cdp}" />
+                        
+                                                        <h:outputText value="Ville: " />
+                                                        <h:outputText id="villeValue" value="#{personne.ville}" />
+                        
+                                                        <h:outputText value="Login: " />
+                                                        <h:outputText id="loginValue" value="#{personne.login}" />
+                        
+                                                        <h:outputText value="Mot de passe: " />
+                                                        <h:outputText id="mdpValue" value="#{personne.mdp}" />
+                                                    </p:panelGrid>
+                                                </p:dialog>-->
 
                     </p:layoutUnit>
 
