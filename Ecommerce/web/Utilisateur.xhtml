@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui" xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      >
+    <f:view contentType="text/html">
+        <h:head>
+            <link rel="stylesheet" type="text/css" href="resources/Ecommerce.css" title="Ecommerce" />
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Liste des utilisateurs</title>
+            </f:facet>
+        </h:head>
+        <h:body>
+            <p:tab title="Liste des utilisateurs">  
+                <h:form>  
+
+                    <p:dataTable id="dataTable" var="personne" value="#{personne.getListPersonne()}" sortMode="multiple" rows="5" paginator="true">  
+                        <f:facet name="header">  
+                            Utilisateurs  
+                        </f:facet>  
+
+                        <p:column sortBy="id_personne" headerText="N° MySQL">  
+                            <h:outputText value="#{personne.id_personne}" />  
+                        </p:column>  
+
+                        <p:column sortBy="nom" headerText="Nom">  
+                            <h:outputText value="#{personne.nom}" />  
+                        </p:column>  
+
+                        <p:column sortBy="prenom" headerText="Prénom">  
+                            <h:outputText value="#{personne.prenom}" />  
+                        </p:column>
+                        
+                         <p:column sortBy="adresse" headerText="Adresse">  
+                            <h:outputText value="#{personne.adresse}" />  
+                        </p:column>
+                        
+                         <p:column sortBy="cdp" headerText="Code Postal">  
+                            <h:outputText value="#{personne.cdp}" />  
+                        </p:column>
+                        <p:column sortBy="ville" headerText="Ville">  
+                            <h:outputText value="#{personne.ville}" />  
+                        </p:column>
+                        
+                        <p:column sortBy="fonction" headerText="Fonction">  
+                            <h:outputText value="#{personne.fonction}" />  
+                        </p:column>
+                        
+                        <p:column sortBy="login" headerText="login">  
+                            <h:outputText value="#{personne.login}" />  
+                        </p:column>
+                        <p:column sortBy="mdp" headerText="Mot de Passe">  
+                            <h:outputText value="#{personne.mdp}" />  
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
+                
+            </p:tab>
+        </h:body>
+    </f:view>
+</html>
