@@ -45,7 +45,7 @@ public class Personne implements Serializable{
         b.closeConnect();
         }
         else System.out.println("Erreur login en doublon");
-        clear();
+        /*clear();*/
 
     }
     
