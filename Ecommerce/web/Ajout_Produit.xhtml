@@ -1,16 +1,132 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <title>TODO supply a title</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui" xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <link rel="stylesheet" type="text/css" href="resources/Ecommerce.css" title="Ecommerce" />
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Formulaire Ajout Produit</title>
+            </f:facet>
+        </h:head>
+
+        <h:body>
+            <h:form>
+                <p:layout fullPage="true">
+
+                    <p:layoutUnit position="north" size="150" resizable="false" closable="false" collapsible="false">
+
+                        <img src="resources/J2EE.png" width="150" height="65" vertical-align="top" margin-left="5" />
+
+                        <p:inputText style="margin-left: 29%;
+                                     margin-bottom: 1%;
+                                     margin-top: 1%;
+                                     vertical-align: top"/> 
+
+                        <p:commandButton value="Rechercher" update="" icon="ui-icon-search" styleClass="commandButton" />                     
+
+                        <p:growl id="messages" showDetail="true" />
+
+                        <p:menubar styleClass="menu">
+                            <p:menuitem value="Nos Saucissons" url="http://localhost:8080/Ecommerce/faces/Saucissons.xhtml"/>
+
+                            <p:menuitem value="Nos Fromages" url="http://localhost:8080/Ecommerce/faces/Fromages.xhtml"/>
+
+                            <p:menuitem value="Nos Pâtés" url="http://localhost:8080/Ecommerce/faces/Pates.xhtml"/>
+
+                        </p:menubar>
+
+                    </p:layoutUnit>
+
+                    <p:layoutUnit position="east" size="175" header="Menu" collapsible="false">
+                        <p:menu>
+
+                            <p:menuitem value="Panier" url="http://www.primefaces.org/showcase-labs/ui/home.jsf" />
+                            <p:menuitem value="Connexion" url="http://localhost:8080/Ecommerce/faces/Connexion.xhtml" />
+                            <p:menuitem value="Nouvel Utilisateur" url="http://localhost:8080/Ecommerce/faces/Formulaire_Utilisateur.xhtml" />
+                            <p:menuitem value="Themes" url="http://www.primefaces.org/themes.html" />
+                            <p:menuitem value="Test Utilisateur" url="http://localhost:8080/Ecommerce/faces/Utilisateur.xhtml" />
+                        </p:menu>
+
+                        <p:menuButton value="Options" style="margin-top: 2%; ">
+                            <p:menuitem value="Homepage" url="http://localhost:8080/Ecommerce/" icon="ui-icon-extlink" />
+                        </p:menuButton>
+
+                    </p:layoutUnit>
+
+                    <p:layoutUnit position="center">
+
+                        <div style="text-align: center">
+                            Formulaire d'ajout produit :
+                        </div>
+
+                        <h:panelGrid styleClass="panel_center" columns="2" cellpadding="5">
+                            <h:outputStylesheet name="Ecommerce.css" />
+                            <p:outputLabel for="nom" value="Nom produit : " />
+                            <p:inputMask id="nom" value="#{produit.nom_produit}" required="true" mask=""/>
+
+                            <p:outputLabel for="cat" value="Catégorie :" />
+                            <p:selectOneMenu id="cat" value="#{produit.categorie}" style="width:125px">
+                                <f:selectItem itemLabel="Select One" itemValue="" />
+                                <f:selectItem itemLabel="Fromage" itemValue="Fromage" />
+                                <f:selectItem itemLabel="Saucisson" itemValue="Saucisson" />
+                                <f:selectItem itemLabel="Pâté" itemValue="Pâté" />
+                            </p:selectOneMenu>
+
+                            <p:outputLabel for="prx" value="Prix Unitaire :" />
+                            <p:inputMask id="prx" value="#{produit.prix_unitaire}" required="true" mask=""/>
+
+                            <p:outputLabel for="desc" value="Description :" />
+                            <p:inputMask id="desc" value="#{produit.description}" required="true" mask=""/>
+
+                            <p:outputLabel for="quantite" value="Quantité ajoutée :" />
+                            <p:spinner id="quantite" value="#{produit.quantite}" min='1' />
+
+                            <p:outputLabel for="login"  value="Login : " />
+                            <p:inputMask id="login" value="#{produit.fournisseur.login()}" required="true" mask=""/>
+
+
+                            <p:commandButton value="Reset" type="reset" styleClass="commandButton" />
+                            <p:commandButton value="Submit" action="#{produit.saveProduit()}" styleClass="commandButton"/>
+                                
+                            <!--update="display"  oncomplete="PF('dlg').show()"/>-->
+
+                        </h:panelGrid>
+                        <!--
+                                                <p:dialog widgetVar="dlg" modal="true" resizable="false" header="Values" showEffect="fade"> 
+                                                    <p:panelGrid id="display" columns="2" columnClasses="label,value">
+                                                        <h:outputText value="Nom: " />
+                                                        <h:outputText id="nomValue" value="#{personne.nom}" />
+                        
+                                                        <h:outputText value="Prénom: " />
+                                                        <h:outputText id="prenomValue" value="#{personne.prenom}" />
+                        
+                                                        <h:outputText value="Adresse: " />
+                                                        <h:outputText id="adresseValue" value="#{personne.adresse}"/>
+                        
+                                                        <h:outputText value="Code Postal: " />
+                                                        <h:outputText id="cdpValue" value="#{personne.cdp}" />
+                        
+                                                        <h:outputText value="Ville: " />
+                                                        <h:outputText id="villeValue" value="#{personne.ville}" />
+                        
+                                                        <h:outputText value="Login: " />
+                                                        <h:outputText id="loginValue" value="#{personne.login}" />
+                        
+                                                        <h:outputText value="Mot de passe: " />
+                                                        <h:outputText id="mdpValue" value="#{personne.mdp}" />
+                                                    </p:panelGrid>
+                                                </p:dialog>-->
+
+                    </p:layoutUnit>
+
+                </p:layout>
+            </h:form>
+        </h:body>
+
+    </f:view>
 </html>
