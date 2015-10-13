@@ -61,8 +61,8 @@
                     <p:layoutUnit position="center">
 
                         <h:form id="form">
-                            <p:dataGrid var="car" value="#{dataGridView.cars}" columns="3" 
-                                        rows="12" paginator="true" id="cars"
+                            <p:dataGrid var="produit" value="#{produit.getListProduit('Saucisson')}" columns="3" 
+                                        rows="12" paginator="true" id="produit"
                                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                         rowsPerPageTemplate="6,12,16">
 
@@ -70,11 +70,11 @@
                                     Nos Saucissons
                                 </f:facet>
 
-                                <p:panel header="#{car.id}" style="text-align:center">
+                                <p:panel header="#{produit.nom_produit}" style="text-align:center">
                                     <h:panelGrid columns="1" style="width:100%">
                                         <p:graphicImage name="demo/images/car/#{car.brand}.gif"/> 
 
-                                        <h:outputText value="#{car.year}" />
+                                        <h:outputText value="#{produit.prix_unitaire}" />
 
                                         <p:commandLink update=":form:carDetail" oncomplete="PF('carDialog').show()" title="View Detail">
                                             <h:outputText styleClass="ui-icon ui-icon-search" style="margin:0 auto;" />
