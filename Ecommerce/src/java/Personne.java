@@ -29,7 +29,8 @@ public class Personne implements Serializable{
      Save Personne into dataBase
     Par defaut fonction = "Client"
      */
-    public void savePersonne() throws InstantiationException, IllegalAccessException {
+    public void savePersonne() throws InstantiationException, IllegalAccessException, SQLException {
+        if (!testBDDLogin(this.login)){
         String[] paramInsert ={this.login,this.mdp,this.nom,this.prenom,this.adresse,this.cdp,this.ville,"CLIENT"};
         String requeteInsert = "INSERT INTO ecommerce.personne"
                     + "(id_personne,login,mdp,nom, prenom,adresse,cdp, ville, fonction)"
@@ -42,8 +43,25 @@ public class Personne implements Serializable{
             System.out.println(e.getMessage());
         }
         b.closeConnect();
+        }
+        else System.out.println("Erreur login en doublon");
+        clear();
 
     }
+    
+    /* vide les champs input */
+    public void clear() {
+        setId_personne(null);
+        setNom(null);
+        setPrenom(null);
+        setAdresse(null);
+        setCdp(null);
+        setVille(null);
+        setLogin(null);
+        setMdp(null);
+        setFonction(null);
+    }//end clear`
+    
     public List<Personne> getListPersonne() throws SQLException, InstantiationException, IllegalAccessException {
         String[] param = null;
         String requeteSelect = "SELECT * FROM  ecommerce.personne";
@@ -64,6 +82,7 @@ public class Personne implements Serializable{
             pers.setFonction(res.getString("fonction"));
             list.add(pers);
         }
+        b.closeConnect();
         return list;
     }
 
@@ -97,6 +116,17 @@ public class Personne implements Serializable{
 
     public String getLogin() {
         return login;
+    }
+    
+    /* test if login exist in BDD
+    true ==> exist else false*/
+    public boolean testBDDLogin(String login) throws InstantiationException, IllegalAccessException, SQLException{
+        String[] paramTest = {"login ="+login};
+        String requeteTest = "SELECT count(*) FROM  ecommerce.personne WHERE ?";
+        ConnectBDD b = new ConnectBDD();
+        b.executeRequete(requeteTest,paramTest);
+        ResultSet res = b.getResultat();
+        return res.getInt(1)>=1;
     }
 
     public String getMdp() {
