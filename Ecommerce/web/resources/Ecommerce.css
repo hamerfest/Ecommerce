@@ -33,12 +33,7 @@ html {
     margin-top: 1%;
 }
 
-.layoutNorth .ui-layout-unit {
-    background: gainsboro;
-}
-
-
-.layoutSouth .ui-layout-unit-content{
+.layoutNorth .ui-layout-unit .ui-layout-unit-content {
     background-color: gainsboro;
     background-repeat: repeat;
 }
