@@ -8,8 +8,6 @@ and open the template in the editor.
     Author     : Matthieu
 */
  body { 
-  color:black;
-  background-color: gainsboro;
   background-image: url('Accueil.jpeg');
   background-size: cover;
   background-repeat: no-repeat;
@@ -33,10 +31,16 @@ html {
     margin-top: 1%;
 }
 
-.layoutNorth .ui-layout-unit .ui-layout-unit-content {
+.layoutNorth {
     background-color: gainsboro;
     background-repeat: repeat;
 }
+
+.ui-layout-unit .ui-layout-content .ui-layout-pane{
+    background-color: gainsboro;
+    background-repeat: repeat;
+}
+
 
 .commandButton1 {
     margin-left: 50%;
@@ -46,9 +50,13 @@ html {
     text-align: center;
 }
 
+.menu{
+    background-color: #FFDF5F;
+}
 div.menu{
 text-align: center;
 }
+
 .menu div.ui-menubar {
 text-align: center;
 }

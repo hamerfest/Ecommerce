@@ -39,7 +39,7 @@ public class Produit implements Serializable {
      Save Personne into dataBase
      Par defaut fonction = "Client"
      */
-    public void savePersonne() throws InstantiationException, IllegalAccessException, SQLException {
+    public void saveProduit() throws InstantiationException, IllegalAccessException, SQLException {
 
         String[] paramInsert = {this.nom_produit, Float.toString(this.prix_unitaire), this.description, Integer.toString(this.quantite), this.fournisseur.getLogin()};
         String requeteInsert = "INSERT INTO ecommerce.produit"

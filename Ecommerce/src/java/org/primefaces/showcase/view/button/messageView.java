@@ -6,9 +6,9 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
  
 @ManagedBean
-public class bienvenueView {
+public class messageView {
      
-    public void buttonAction(ActionEvent actionEvent) {
+    public void buttonAction1(ActionEvent actionEvent) {
         addMessage("Bienvenue !");
     }
      
