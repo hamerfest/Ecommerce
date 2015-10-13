@@ -10,11 +10,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.faces.bean.ManagedBean;
  
 @ManagedBean
 public class Personne implements Serializable{
-    private String id_personne;
+    private Integer id_personne;
     private String nom;
     private String prenom;
     private String adresse;
@@ -47,12 +48,12 @@ public class Personne implements Serializable{
         String[] param = null;
         String requeteSelect = "SELECT * FROM  ecommerce.personne";
         ConnectBDD b =new ConnectBDD();
-        List<Personne> list = new ArrayList<Personne>();
+        List<Personne> list = new ArrayList<>();
         b.executeRequete(requeteSelect,param);
         ResultSet res = b.getResultat();
         while (res.next()){
             Personne pers = new Personne();
-            pers.setNom(res.getString("id_personne"));
+            pers.setId_personne(res.getInt("id_personne"));
             pers.setLogin(res.getString("login"));
             pers.setMdp(res.getString("mdp"));
             pers.setNom(res.getString("nom"));
@@ -66,11 +67,11 @@ public class Personne implements Serializable{
         return list;
     }
 
-    public String getId_personne() {
+    public Integer getId_personne() {
         return id_personne;
     }
 
-    public void setId_personne(String id_personne) {
+    public void setId_personne(Integer id_personne) {
         this.id_personne = id_personne;
     }
     
