@@ -74,3 +74,7 @@ width: 99%;
 .ui-menuitem-text{
 float: none!important;
 }
+
+.someCustomClass .ui-datagrid-column {
+    width: 100%;
+}

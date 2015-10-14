@@ -33,13 +33,13 @@
 
                         <p:menubar styleClass="menu">
                             <p:menuitem value="Nos Saucissons" url="http://localhost:8080/Ecommerce/faces/Saucissons.xhtml"/>
-                                                      
+
                             <p:menuitem value="Nos Fromages" url="http://localhost:8080/Ecommerce/faces/Fromages.xhtml"/>
-                            
+
                             <p:menuitem value="Nos Pâtés" url="http://localhost:8080/Ecommerce/faces/Pates.xhtml"/>
 
                         </p:menubar>
-                        
+
                     </p:layoutUnit>
 
                     <p:layoutUnit position="east" size="175" header="Menu" collapsible="false">
@@ -51,11 +51,11 @@
                             <p:menuitem value="Themes" url="http://www.primefaces.org/themes.html" />
 
                         </p:menu>
-                        
-                         <p:menuButton value="Options" style="margin-top: 2%; ">
+
+                        <p:menuButton value="Options" style="margin-top: 2%; ">
                             <p:menuitem value="Homepage" url="http://localhost:8080/Ecommerce/" icon="ui-icon-extlink" />
                         </p:menuButton>
-                        
+
                     </p:layoutUnit>
 
                     <p:layoutUnit position="center">
@@ -71,17 +71,19 @@
                                 </f:facet>
 
                                 <p:panel header="#{produit.nom_produit}" style="text-align:center">
-                                    <h:panelGrid columns="1" style="width:100%">
-                                        <p:graphicImage name="demo/images/car/#{car.brand}.gif"/> 
+                                <h:panelGrid columns="1" style="width: 100%; text-align: center">
+                                    <p:graphicImage value="#{produit.image}.jpg" height="100px" width="100px"/> 
 
-                                        <h:outputText value="#{produit.prix_unitaire}" />
+                                    <h:outputText value="Prix : #{produit.prix_unitaire}€" style="text-align: center"/>
 
-                                        <p:commandLink update=":form:carDetail" oncomplete="PF('carDialog').show()" title="View Detail">
-                                            <h:outputText styleClass="ui-icon ui-icon-search" style="margin:0 auto;" />
-                                            <f:setPropertyActionListener value="#{car}" target="#{dataGridView.selectedCar}" />
-                                        </p:commandLink>
+                                    <h:panelGrid columns="3" cellpadding="5" styleClass="panel_center">
+                                        <p:outputLabel for="quantite" value="Qté :"  />
+                                        <p:spinner id="quantite" value="0" />
+                                        <p:commandButton icon="ui-icon-check" />
                                     </h:panelGrid>
-                                </p:panel>
+
+                                </h:panelGrid>
+                            </p:panel>
 
                             </p:dataGrid>
                         </h:form>

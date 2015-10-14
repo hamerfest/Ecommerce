@@ -26,6 +26,7 @@ public class Produit implements Serializable {
     private String description;
     private int quantite;
     private Personne fournisseur;
+    private String image;
 
     public Personne getFournisseur() {
         return fournisseur;
@@ -41,9 +42,9 @@ public class Produit implements Serializable {
      */
     public void saveProduit() throws InstantiationException, IllegalAccessException, SQLException {
 
-        String[] paramInsert = {this.nom_produit, Float.toString(this.prix_unitaire), this.description, Integer.toString(this.quantite), this.fournisseur.getLogin()};
+        String[] paramInsert = {this.nom_produit, Float.toString(this.prix_unitaire), this.description, Integer.toString(this.quantite), this.fournisseur.getLogin(), this.image};
         String requeteInsert = "INSERT INTO ecommerce.produit"
-                + "(id_produit,nom_produit,categorie,prix_unitaire,description,quantite,login)"
+                + "(id_produit,nom_produit,categorie,prix_unitaire,description,quantite,login, image)"
                 + "VALUES (NULL,?,?,?,?,?,?,?,?)";
         ConnectBDD b = new ConnectBDD();
         try {
@@ -90,6 +91,7 @@ public class Produit implements Serializable {
             prod.setNom_produit(res.getString("nom_produit"));
             prod.setPrix_unitaire(res.getFloat("prix_unitaire"));
             prod.setQuantite(res.getInt("quantite"));
+            prod.setImage("resources/"+res.getString("image"));
             /*Personne*/
             Personne pers = new Personne();
             pers.setId_personne(res.getInt("id_personne"));
@@ -206,6 +208,14 @@ public class Produit implements Serializable {
      */
     public Integer getId_produit() {
         return id_produit;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     /**
