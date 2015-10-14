@@ -59,11 +59,12 @@
                     </p:layoutUnit>
 
                     <p:layoutUnit position="center">
-                        <div style="text-align: center">
-                            Formulaire de nouvel utilisateur !
-                        </div>
-                        
-                        <p:separator />
+                        <f:facet name="header">
+                            <div style='text-align: center'>
+                                Formulaire de nouvel utilisateur !
+                            </div>
+                        </f:facet>
+                       
                         <h:form>
                             <p:messages id="msg" showDetail="false" autoUpdate="true" closable="true" />
                             <h:panelGrid id="formUser" styleClass="panel_center" columns="3" cellpadding="5">
