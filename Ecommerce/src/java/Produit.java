@@ -112,8 +112,9 @@ public class Produit implements Serializable {
     public List<Produit> getListFromage() throws SQLException, InstantiationException, IllegalAccessException {
         return getListProduit("Fromage");
     }
-
-    /**
+    
+    
+     /**
      *
      * @param categorie Saucisson , Pâté ou Fromage
      * @return
