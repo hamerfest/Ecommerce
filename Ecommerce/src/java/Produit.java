@@ -52,14 +52,15 @@ public class Produit implements Serializable {
     /*
      Save Produit into dataBase
      */
-    public void addProduit() throws InstantiationException, IllegalAccessException, SQLException {
-        if (!testBDDNom()) { /* Nouveau produit par le fournisseur */
+    public void addProduit(String newClassLogin) throws InstantiationException, IllegalAccessException, SQLException {
+        System.out.println(newClassLogin);
+        if (!testBDDNom(newClassLogin)) { /* Nouveau produit par le fournisseur */
             String[] paramInsert;
             String requeteInsert;
             /*traitement description*/
             if (description == null || description.isEmpty() || "".equals(description)){
                 
-                String[] param = {this.nom_produit,this.categorie,Float.toString(this.prix_unitaire), Integer.toString(this.quantite), this.login};
+                String[] param = {this.nom_produit,this.categorie,Float.toString(this.prix_unitaire), Integer.toString(this.quantite), newClassLogin};
                 requeteInsert = "INSERT INTO ecommerce.produit"
                     + "(id_produit,nom_produit,categorie,prix_unitaire,description,quantite,login)"
                     + "VALUES (NULL,?,?,?,NULL,?,?)";
@@ -91,8 +92,8 @@ public class Produit implements Serializable {
         }
     }
 
-    public boolean testBDDNom() throws InstantiationException, SQLException, IllegalAccessException {
-        String requeteTest = "SELECT count(*) FROM  ecommerce.produit WHERE nom_produit='"+nom_produit+"' AND categorie='"+categorie+"' AND login='"+login+"'";
+    public boolean testBDDNom(String newClassLogin) throws InstantiationException, SQLException, IllegalAccessException {
+        String requeteTest = "SELECT count(*) FROM  ecommerce.produit WHERE nom_produit='"+nom_produit+"' AND categorie='"+categorie+"' AND login='"+newClassLogin+"'";
         ConnectBDD c = new ConnectBDD();
         c.executeRequete(requeteTest, null);
         ResultSet res = c.getResultat();

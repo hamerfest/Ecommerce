@@ -67,9 +67,9 @@
                         </f:facet>
 
                         <h:form>
-                            <p:messages id="msg" showDetail="false" autoUpdate="true" closable="true" />
+                            <p:messages id="msg" showDetail="true" autoUpdate="true" closable="true" />
                             <h:panelGrid id="formProduit" styleClass="panel_center" columns="3" cellpadding="5">
-
+                                <h:outputStylesheet name="Ecommerce.css" />
                                 <p:outputLabel for="nom" value="Nom du produit :" />
                                 <p:inputMask id="nom" value="#{produit.nom_produit}" required="true" mask=""/>
                                 <p:message for="nom"/>
@@ -95,14 +95,9 @@
                                 <p:outputLabel for="quantite" value="Quantité ajoutée :" />
                                 <p:spinner id="quantite" value="#{produit.quantite}" min='1' required="true" />
                                 <p:message for="quantite"/>
-
-                                <p:outputLabel for="fournisseur"  value="Login : " />
-                                <p:inputMask id="fournisseur" value="#{produit.login}" required="true" mask=""/>
-
-                                <p:message for="fournisseur"/>
-
+                                
                                 <p:commandButton value="Réinitialiser" type="reset" styleClass="commandButton" />
-                                <p:commandButton update="formProduit" value="Ajouter Produit" actionListener="#{produit.addProduit}" styleClass="commandButton"/>
+                                <p:commandButton update="formProduit" value="Ajouter Produit" actionListener="#{produit.addProduit(newClass.login)}" styleClass="commandButton"/>
                             </h:panelGrid>
                         </h:form>
                     </p:layoutUnit>
