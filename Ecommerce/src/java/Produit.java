@@ -52,8 +52,8 @@ public class Produit implements Serializable {
     /*
      Save Produit into dataBase
      */
-    public void saveProduit() throws InstantiationException, IllegalAccessException, SQLException {
-        if (!testBDDNom()) {
+    public void addProduit() throws InstantiationException, IllegalAccessException, SQLException {
+        if (!testBDDNom()) { /* Nouveau produit par le fournisseur */
             String[] paramInsert;
             String requeteInsert;
             /*traitement description*/
@@ -83,15 +83,16 @@ public class Produit implements Serializable {
             }
             b.closeConnect();
         } else {
-            FacesContext.getCurrentInstance().addMessage("msg",new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning!", "Nom déjà existant pour ce produit choisi est déjà utilisé"));
+            
+            FacesContext.getCurrentInstance().addMessage("msg",new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning!", "Ce produit existe déjà"));
             System.out.println("Erreur nom en doublon");
-            FacesContext.getCurrentInstance().addMessage("nom",new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning!", "Veuillez en inscrire un autre nom de produit"));
+            FacesContext.getCurrentInstance().addMessage("nom",new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning!", "Veuillez en inscrire un autre produit"));
         
         }
     }
 
     public boolean testBDDNom() throws InstantiationException, SQLException, IllegalAccessException {
-        String requeteTest = "SELECT count(*) FROM  ecommerce.produit WHERE nom_produit='"+nom_produit+"' AND categorie='"+categorie+"'";
+        String requeteTest = "SELECT count(*) FROM  ecommerce.produit WHERE nom_produit='"+nom_produit+"' AND categorie='"+categorie+"' AND login='"+login+"'";
         ConnectBDD c = new ConnectBDD();
         c.executeRequete(requeteTest, null);
         ResultSet res = c.getResultat();
