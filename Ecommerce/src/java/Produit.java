@@ -66,7 +66,7 @@ public class Produit implements Serializable {
                     + "VALUES (NULL,?,?,?,NULL,?,?)";
                 paramInsert=param;
             }else {
-                 String[] param = {this.nom_produit,this.categorie, Float.toString(this.prix_unitaire),description, Integer.toString(this.quantite), this.login};
+                 String[] param = {this.nom_produit,this.categorie, Float.toString(this.prix_unitaire),description, Integer.toString(this.quantite), newClassLogin};
                  requeteInsert = "INSERT INTO ecommerce.produit"
                     + "(id_produit,nom_produit,categorie,prix_unitaire,description,quantite,login)"
                     + "VALUES (NULL,?,?,?,?,?,?)";
