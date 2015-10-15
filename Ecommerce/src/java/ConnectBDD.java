@@ -91,6 +91,7 @@ public class ConnectBDD {
                 System.out.println("Requete executée : selection de " + size + " résultats");
             } catch (SQLException e) {
                 System.out.println("Erreur lors de l'execution de la requete : " + e.getMessage());
+                   System.out.println(requete);
             }
         } else { /*UPDATE ou INSERT*/
             System.out.println("Traitement requete UPDATE or INSERT");

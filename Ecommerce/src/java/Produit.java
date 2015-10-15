@@ -32,7 +32,7 @@ public class Produit implements Serializable {
     private String login;
     private Personne myFournisseur;
     private Integer quantiteSelected =0;
-
+    private Float total;
     public Personne getFournisseur() {
         return fournisseur;
     }
@@ -43,6 +43,14 @@ public class Produit implements Serializable {
 
     public Integer getQuantiteSelected() {
         return quantiteSelected;
+    }
+
+    public Float getTotal() {
+        return total;
+    }
+
+    public void setTotal(Float total) {
+        this.total = total;
     }
 
     public void setQuantiteSelected(Integer quantiteSelected) {
@@ -171,6 +179,31 @@ public class Produit implements Serializable {
             pers.setFonction(res.getString("fonction"));
             prod.setMyFournisseur(pers);
             prod.setLogin(pers.getLogin());
+            list.add(prod);
+        }
+        b.closeConnect();
+        return list;
+    }
+    
+    public List<Produit> getListPanier(String newClassLogin) throws SQLException, InstantiationException, IllegalAccessException {
+        String[] param = null;
+        String requeteSelect = "SELECT produit.categorie,produit.nom_produit,produit.description, produit.prix_unitaire ,ligne_commande.quantite, produit.prix_unitaire * ligne_commande.quantite "
+                +"FROM ecommerce.produit "
+                + "inner join ecommerce.ligne_commande on produit.id_produit=ligne_commande.id_produit "
+                + "INNER JOIN ecommerce.commande on commande.id_commande=ligne_commande.id_commande "
+                + "WHERE commande.statut='progress' and commande.login='"+newClassLogin+"'";
+        ConnectBDD b = new ConnectBDD();
+        List<Produit> list = new ArrayList<>();
+        b.executeRequete(requeteSelect, param);
+        ResultSet res = b.getResultat();
+        while (res.next()) {
+            Produit prod = new Produit();
+            prod.setCategorie(res.getString(1));
+            prod.setDescription(res.getString(3));
+            prod.setNom_produit(res.getString(2));
+            prod.setPrix_unitaire(res.getFloat(4));
+            prod.setQuantite(res.getInt(5));
+            prod.setTotal(res.getFloat(6));
             list.add(prod);
         }
         b.closeConnect();

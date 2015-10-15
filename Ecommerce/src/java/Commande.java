@@ -16,7 +16,7 @@ import javax.faces.bean.ManagedBean;
 public class Commande {
     private Integer id_commande;
     private String statut;
-    private Integer prix_total;
+    private Float prix_total;
     private Date date_commande;
     private Date date_livraison;
     private String login;
