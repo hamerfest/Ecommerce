@@ -226,11 +226,13 @@ public class NewClass implements Serializable {
     }
 
     public void Modif(String login) throws SQLException, InstantiationException, IllegalAccessException {
-
+        FacesMessage message = null;
         String[] param = {mdp, login};
         String requeteSelect = "UPDATE personne SET mdp=? WHERE login =?";
         ConnectBDD b = new ConnectBDD();
         b.executeRequete(requeteSelect, param);
+        message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Félicitations !", "Votre mot de passe a été modifié:"+ mdp);
+        FacesContext.getCurrentInstance().addMessage(null, message);
 
     }
 
