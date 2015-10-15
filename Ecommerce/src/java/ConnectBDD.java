@@ -100,6 +100,7 @@ public class ConnectBDD {
                 System.out.println("Requete executée : " + size + " action(s)");
             } catch (SQLException e) {
                 System.out.println("Erreur lors de l'execution de la requete : " + e.getMessage());
+                System.out.println(sqlrequete);
             }
         }
     }
