@@ -21,13 +21,13 @@
             <p:dialog header="Connectez-vous !" widgetVar="dlg" resizable="false" visible="true">
                 <h:panelGrid columns="2" cellpadding="5">
                     <h:outputLabel for="username" value="Login :" />
-                    <p:inputText id="username" value="#{user.login}" required="true" label="username" />
+                    <p:inputText id="username" value="#{newClass.login}" required="true" label="username" />
 
                     <h:outputLabel for="password" value="Mot de passe :" />
-                    <p:password id="password" value="#{user.mdp}" required="true" label="password" />
+                    <p:password id="password" value="#{newClass.mdp}" required="true" label="password" />
 
                     <f:facet name="footer">
-                        <p:commandButton value="Connection" icon="ui-icon-check" update="growl" actionListener="#{user.connexion()}"
+                        <p:commandButton value="Connection" icon="ui-icon-check" update="growl" actionListener="#{newClass.connexion()}"
                                          oncomplete="handleLoginRequest(xhr, status, args)" />
                     </f:facet>  
                 </h:panelGrid>

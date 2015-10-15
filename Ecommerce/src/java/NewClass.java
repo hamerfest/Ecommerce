@@ -20,7 +20,7 @@ import javax.faces.bean.SessionScoped;
 
 @SessionScoped
 @ManagedBean
-public class User implements Serializable{
+public class NewClass implements Serializable{
     private Integer id_personne;
     private String nom;
     private String prenom;
@@ -171,13 +171,13 @@ public class User implements Serializable{
     }    
 
     
-    public User getPersonne() throws SQLException, InstantiationException, IllegalAccessException {
+    public NewClass getPersonne() throws SQLException, InstantiationException, IllegalAccessException {
         String[] param = null;
         String requeteSelect = "SELECT * FROM  ecommerce.personne WHERE login='"+login+"' AND mdp='"+mdp+"'";
         ConnectBDD b =new ConnectBDD();
         b.executeRequete(requeteSelect,param);
         ResultSet res = b.getResultat();
-        User pers = new User();
+        NewClass pers = new NewClass();
         while (res.next()){
             pers.setId_personne(1);
             pers.setLogin(res.getString("login"));

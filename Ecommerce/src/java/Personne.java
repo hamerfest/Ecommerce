@@ -36,7 +36,7 @@ public class Personne implements Serializable{
      */
     public void savePersonne() throws InstantiationException, IllegalAccessException, SQLException {
         if (!testBDDLogin()){
-        String[] paramInsert ={this.login,this.mdp,this.nom,this.prenom,this.adresse,this.cdp,this.ville,"CLIENT"};
+        String[] paramInsert ={this.login,this.mdp,this.nom,this.prenom,this.adresse,this.cdp,this.ville,"client"};
         String requeteInsert = "INSERT INTO ecommerce.personne"
                     + "(id_personne,login,mdp,nom, prenom,adresse,cdp, ville,fonction)"
                     + "VALUES (NULL,?,?,?,?,?,?,?,?)";
