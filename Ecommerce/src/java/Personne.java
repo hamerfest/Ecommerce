@@ -16,8 +16,7 @@ import javax.faces.application.FacesMessage;
 import org.primefaces.context.RequestContext;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
-
+import javax.faces.bean.SessionScoped;
 
 
 @ManagedBean
@@ -119,7 +118,8 @@ public class Personne implements Serializable{
     /* test if login exist in BDD
     true ==> exist else false*/
     public boolean testBDDLogin() throws InstantiationException, IllegalAccessException, SQLException{
-        String requeteTest = "SELECT count(*) FROM  ecommerce.personne WHERE login='"+login+"'";
+        String requeteTest = ""
+                + "SELECT count(*) FROM  ecommerce.personne WHERE login='"+login+"'";
         ConnectBDD c = new ConnectBDD();
         c.executeRequete(requeteTest,null);
         ResultSet res = c.getResultat();
@@ -128,6 +128,7 @@ public class Personne implements Serializable{
         }
         return false;
     }
+    
 
     public String getMdp() {
         return mdp;
@@ -168,4 +169,42 @@ public class Personne implements Serializable{
     public void setMdp(String mdp) {
         this.mdp = mdp;
     }    
-}
+
+    
+//    public Personne getPersonne() throws SQLException, InstantiationException, IllegalAccessException {
+//        String[] param = null;
+//        String requeteSelect = "SELECT * FROM  ecommerce.personne WHERE login='"+login+"' AND mdp='"+mdp+"'";
+//        ConnectBDD b =new ConnectBDD();
+//        b.executeRequete(requeteSelect,param);
+//        ResultSet res = b.getResultat();
+//        Personne pers = new Personne();
+//        while (res.next()){
+//            pers.setId_personne(1);
+//            pers.setLogin(res.getString("login"));
+//            pers.setMdp(res.getString("mdp"));
+//            pers.setNom(res.getString("nom"));
+//            pers.setPrenom(res.getString("prenom"));
+//            pers.setAdresse(res.getString("adresse"));
+//            pers.setCdp(res.getString("cdp"));
+//            pers.setVille(res.getString("ville"));
+//            pers.setFonction(res.getString("fonction"));
+//        }
+//        b.closeConnect();
+//        return pers;
+//    }
+     public boolean testConnexion() throws InstantiationException, IllegalAccessException, SQLException{
+        String requeteTest = ""
+                + "SELECT count(*) FROM  ecommerce.personne WHERE login='"+login+"' AND mdp='"+mdp+"'";
+        ConnectBDD c = new ConnectBDD();
+        c.executeRequete(requeteTest,null);
+        ResultSet res = c.getResultat();
+        while (res.next()){            
+            return (res.getInt(1)==1);
+        }
+        
+        return false;
+    }
+
+     
+    }
+
