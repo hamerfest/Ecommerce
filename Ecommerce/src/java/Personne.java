@@ -16,7 +16,9 @@ import javax.faces.application.FacesMessage;
 import org.primefaces.context.RequestContext;
 
 import javax.faces.bean.ManagedBean;
- 
+import javax.faces.bean.RequestScoped;
+
+@RequestScoped
 @ManagedBean
 public class Personne implements Serializable{
     private Integer id_personne;
@@ -28,13 +30,12 @@ public class Personne implements Serializable{
     private String login;
     private String mdp;
     private String fonction;
-    
     /*
      Save Personne into dataBase
     Par defaut fonction = "Client"
      */
     public void savePersonne() throws InstantiationException, IllegalAccessException, SQLException {
-        if (!testBDDLogin(this.login)){
+        if (!testBDDLogin()){
         String[] paramInsert ={this.login,this.mdp,this.nom,this.prenom,this.adresse,this.cdp,this.ville,"CLIENT"};
         String requeteInsert = "INSERT INTO ecommerce.personne"
                     + "(id_personne,login,mdp,nom, prenom,adresse,cdp, ville,fonction)"
@@ -48,7 +49,6 @@ public class Personne implements Serializable{
             System.out.println("Erreur lors de la sauvegarde");
             System.out.println(e.getMessage());
         }
-        
         b.closeConnect();
         }
         else{ 
@@ -56,22 +56,7 @@ public class Personne implements Serializable{
             System.out.println("Erreur login en doublon");
             FacesContext.getCurrentInstance().addMessage("login",new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning!", "Veuillez en inscrire un autre login"));
         }
-        clear();
-
     }
-    
-    /* vide les champs input */
-    public void clear() {
-        setId_personne(null);
-        setNom(null);
-        setPrenom(null);
-        setAdresse(null);
-        setCdp(null);
-        setVille(null);
-        setLogin(null);
-        setMdp(null);
-        setFonction(null);
-    }//end clear`
     
     public List<Personne> getListPersonne() throws SQLException, InstantiationException, IllegalAccessException {
         String[] param = null;
@@ -97,6 +82,7 @@ public class Personne implements Serializable{
         return list;
     }
 
+    
     public Integer getId_personne() {
         return id_personne;
     }
@@ -131,11 +117,10 @@ public class Personne implements Serializable{
     
     /* test if login exist in BDD
     true ==> exist else false*/
-    public boolean testBDDLogin(String login) throws InstantiationException, IllegalAccessException, SQLException{
-        String[] paramTest = {"login ="+login};
+    public boolean testBDDLogin() throws InstantiationException, IllegalAccessException, SQLException{
         String requeteTest = "SELECT count(*) FROM  ecommerce.personne WHERE login='"+login+"'";
         ConnectBDD c = new ConnectBDD();
-        c.executeRequete(requeteTest,paramTest);
+        c.executeRequete(requeteTest,null);
         ResultSet res = c.getResultat();
         while (res.next()){
             return (res.getInt(1)>=1);

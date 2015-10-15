@@ -13,8 +13,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.faces.application.FacesMessage;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
 
 @ManagedBean
 public class Produit implements Serializable {
@@ -25,46 +27,90 @@ public class Produit implements Serializable {
     private float prix_unitaire;
     private String description;
     private int quantite;
-    private Personne fournisseur;
+    private String login;
+    private Personne myFournisseur;
 
-    public Personne getFournisseur() {
-        return fournisseur;
+    public Personne getMyFournisseur() {
+        return myFournisseur;
     }
 
-    public void setFournisseur(Personne fournisseur) {
-        this.fournisseur = fournisseur;
+    public void setMyFournisseur(Personne myFournisseur) {
+        this.myFournisseur = myFournisseur;
+    }
+    
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String fournisseur) {
+        this.login = fournisseur;
     }
 
     /*
-     Save Personne into dataBase
-     Par defaut fonction = "Client"
+     Save Produit into dataBase
      */
     public void saveProduit() throws InstantiationException, IllegalAccessException, SQLException {
-
-        String[] paramInsert = {this.nom_produit, Float.toString(this.prix_unitaire), this.description, Integer.toString(this.quantite), this.fournisseur.getLogin()};
-        String requeteInsert = "INSERT INTO ecommerce.produit"
-                + "(id_produit,nom_produit,categorie,prix_unitaire,description,quantite,login)"
-                + "VALUES (NULL,?,?,?,?,?,?,?,?)";
-        ConnectBDD b = new ConnectBDD();
-        try {
-            b.executeRequete(requeteInsert, paramInsert);
-        } catch (Exception e) {
-            System.out.println("Erreur lors de la sauvegarde");
-            System.out.println(e.getMessage());
+        if (!testBDDNom()) {
+            String[] paramInsert;
+            String requeteInsert;
+            /*traitement description*/
+            if (description == null || description.isEmpty() || "".equals(description)){
+                
+                String[] param = {this.nom_produit,this.categorie,Float.toString(this.prix_unitaire), Integer.toString(this.quantite), this.login};
+                requeteInsert = "INSERT INTO ecommerce.produit"
+                    + "(id_produit,nom_produit,categorie,prix_unitaire,description,quantite,login)"
+                    + "VALUES (NULL,?,?,?,NULL,?,?)";
+                paramInsert=param;
+            }else {
+                 String[] param = {this.nom_produit,this.categorie, Float.toString(this.prix_unitaire),description, Integer.toString(this.quantite), this.login};
+                 requeteInsert = "INSERT INTO ecommerce.produit"
+                    + "(id_produit,nom_produit,categorie,prix_unitaire,description,quantite,login)"
+                    + "VALUES (NULL,?,?,?,?,?,?)";
+                 paramInsert=param;
+            }
+            
+            ConnectBDD b = new ConnectBDD();
+            try {
+                b.executeRequete(requeteInsert, paramInsert);
+                FacesContext.getCurrentInstance().addMessage("msg", new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Enregistrement Réussie"));
+            } catch (Exception e) {
+                FacesContext.getCurrentInstance().addMessage("msg", new FacesMessage(FacesMessage.SEVERITY_FATAL, "Fatal!", "System Error : Enregistrement Echouée"));
+                System.out.println("Erreur lors de la sauvegarde");
+                System.out.println(e.getMessage());
+            }
+            b.closeConnect();
+        } else {
+            FacesContext.getCurrentInstance().addMessage("msg",new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning!", "Nom déjà existant pour ce produit choisi est déjà utilisé"));
+            System.out.println("Erreur nom en doublon");
+            FacesContext.getCurrentInstance().addMessage("nom",new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning!", "Veuillez en inscrire un autre nom de produit"));
+        
         }
-        b.closeConnect();
     }
-    
-    public List<Produit> getListSaucisson() throws SQLException, InstantiationException, IllegalAccessException{
+
+    public boolean testBDDNom() throws InstantiationException, SQLException, IllegalAccessException {
+        String requeteTest = "SELECT count(*) FROM  ecommerce.produit WHERE nom_produit='"+nom_produit+"' AND categorie='"+categorie+"'";
+        ConnectBDD c = new ConnectBDD();
+        c.executeRequete(requeteTest, null);
+        ResultSet res = c.getResultat();
+        while (res.next()) {
+            return (res.getInt(1) >= 1);
+        }
+        return false;
+    }
+
+    public List<Produit> getListSaucisson() throws SQLException, InstantiationException, IllegalAccessException {
         return getListProduit("Saucisson");
     }
-    
-    public List<Produit> getListPate() throws SQLException, InstantiationException, IllegalAccessException{
+
+    public List<Produit> getListPate() throws SQLException, InstantiationException, IllegalAccessException {
         return getListProduit("Pâté");
     }
-    public List<Produit> getListFromage() throws SQLException, InstantiationException, IllegalAccessException{
+
+    public List<Produit> getListFromage() throws SQLException, InstantiationException, IllegalAccessException {
         return getListProduit("Fromage");
     }
+
     /**
      *
      * @param categorie Saucisson , Pâté ou Fromage
@@ -73,16 +119,14 @@ public class Produit implements Serializable {
      * @throws InstantiationException
      * @throws IllegalAccessException
      */
-    
-    
     public List<Produit> getListProduit(String categorie) throws SQLException, InstantiationException, IllegalAccessException {
         String[] param = null;
-        String requeteSelect = "SELECT * FROM  ecommerce.produit INNER JOIN ecommerce.personne on personne.login=produit.login where produit.categorie='"+categorie+"'";
-        ConnectBDD b =new ConnectBDD();
+        String requeteSelect = "SELECT * FROM  ecommerce.produit INNER JOIN ecommerce.personne on personne.login=produit.login where produit.categorie='" + categorie + "'";
+        ConnectBDD b = new ConnectBDD();
         List<Produit> list = new ArrayList<>();
-        b.executeRequete(requeteSelect,param);
+        b.executeRequete(requeteSelect, param);
         ResultSet res = b.getResultat();
-        while (res.next()){
+        while (res.next()) {
             Produit prod = new Produit();
             prod.setId_produit(res.getInt("id_produit"));
             prod.setCategorie(res.getString("categorie"));
@@ -101,14 +145,15 @@ public class Produit implements Serializable {
             pers.setCdp(res.getString("cdp"));
             pers.setVille(res.getString("ville"));
             pers.setFonction(res.getString("fonction"));
-            prod.setFournisseur(pers);
+            prod.setMyFournisseur(pers);
+            prod.setLogin(pers.getLogin());
             list.add(prod);
         }
         b.closeConnect();
         return list;
     }
     
-
+    
     /**
      * Get the value of quantite
      *

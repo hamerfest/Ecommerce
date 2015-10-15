@@ -93,41 +93,13 @@
                                 <p:message for="login" />
                                 
                                 <p:outputLabel for="mdp"  value="Mot de passe : " />
-                                <p:password id="mdp" value="#{personne.mdp}" required="true" mask=""/>
+                                <p:password id="mdp" value="#{personne.mdp}" required="true" />
                                 <p:message for="mdp" />
                                 
                                 <p:commandButton value="Réinitialiser" type="reset" styleClass="commandButton" />
                                 <p:commandButton update="formUser" value="Enregistrer" actionListener="#{personne.savePersonne}" styleClass="commandButton" />
-                                <!--update="display"  oncomplete="PF('dlg').show()"/>-->
-
                             </h:panelGrid>
                         </h:form>
-                        <!--
-                                                <p:dialog widgetVar="dlg" modal="true" resizable="false" header="Values" showEffect="fade"> 
-                                                    <p:panelGrid id="display" columns="2" columnClasses="label,value">
-                                                        <h:outputText value="Nom: " />
-                                                        <h:outputText id="nomValue" value="#{personne.nom}" />
-                        
-                                                        <h:outputText value="Prénom: " />
-                                                        <h:outputText id="prenomValue" value="#{personne.prenom}" />
-                        
-                                                        <h:outputText value="Adresse: " />
-                                                        <h:outputText id="adresseValue" value="#{personne.adresse}"/>
-                        
-                                                        <h:outputText value="Code Postal: " />
-                                                        <h:outputText id="cdpValue" value="#{personne.cdp}" />
-                        
-                                                        <h:outputText value="Ville: " />
-                                                        <h:outputText id="villeValue" value="#{personne.ville}" />
-                        
-                                                        <h:outputText value="Login: " />
-                                                        <h:outputText id="loginValue" value="#{personne.login}" />
-                        
-                                                        <h:outputText value="Mot de passe: " />
-                                                        <h:outputText id="mdpValue" value="#{personne.mdp}" />
-                                                    </p:panelGrid>
-                                                </p:dialog>-->
-
                     </p:layoutUnit>
 
                 </p:layout>
