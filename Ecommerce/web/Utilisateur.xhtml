@@ -55,7 +55,7 @@ and open the template in the editor.
 
                             <p:menuitem value="Panier" url="http://www.primefaces.org/showcase-labs/ui/home.jsf" />
                             <p:menuitem value="Connexion" url="http://localhost:8080/Ecommerce/faces/Connexion.xhtml" />
-                            <c:if test="$user.login!='admin'">
+                            <c:if test="$newClass.login!='admin'">
                                 <p:menuitem value="Nouvel Utilisateur" url="http://localhost:8080/Ecommerce/faces/Formulaire_Utilisateur.xhtml" />
                             </c:if>
                             <p:menuitem value="Themes" url="http://localhost:8080/Ecommerce/faces/Utilisateur.xhtml" />

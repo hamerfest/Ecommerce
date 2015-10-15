@@ -33,7 +33,12 @@
 
                         <p:commandButton value="Rechercher" update="" icon="ui-icon-search" styleClass="commandButton" />
                        
-
+                        <!--<c:if test="$newClass.login!=null">-->
+                            <p:commandButton value="Déconnexion" icon='ui-icon-cancel' action="index.xhtml?faces-redirect=true"  style=" margin-bottom: 1%;
+                                     margin-top: 1%;
+                                     vertical-align: top"/>
+                        <!--</c:if>-->
+                        
                         <p:growl id="messages" showDetail="true" />
 
                         <p:menubar styleClass="menu">
