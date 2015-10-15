@@ -66,10 +66,11 @@
                         </f:facet>
                        
                         <h:form>
-                            <p:messages id="msg" showDetail="false" autoUpdate="true" closable="true" />
+                            <p:messages id="msg" showDetail="true" autoUpdate="true" closable="true" />
                             <h:panelGrid id="formUser" styleClass="panel_center" columns="3" cellpadding="5">
-                                <h:outputStylesheet name="Ecommerce.css" />
-                                <p:outputLabel for="prenom" value="Prénom: " />
+          <h:outputStylesheet name="Ecommerce.css" />  
+          
+          <p:outputLabel for="prenom" value="Prénom: " />
                                 <p:inputMask id="prenom" value="#{personne.prenom}" required="true" mask=""/>
                                 <p:message for="prenom" />
 

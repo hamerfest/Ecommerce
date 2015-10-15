@@ -52,20 +52,21 @@ public class Produit implements Serializable {
     /*
      Save Produit into dataBase
      */
-    public void saveProduit() throws InstantiationException, IllegalAccessException, SQLException {
-        if (!testBDDNom()) {
+    public void addProduit(String newClassLogin) throws InstantiationException, IllegalAccessException, SQLException {
+        System.out.println(newClassLogin);
+        if (!testBDDNom(newClassLogin)) { /* Nouveau produit par le fournisseur */
             String[] paramInsert;
             String requeteInsert;
             /*traitement description*/
             if (description == null || description.isEmpty() || "".equals(description)){
                 
-                String[] param = {this.nom_produit,this.categorie,Float.toString(this.prix_unitaire), Integer.toString(this.quantite), this.login};
+                String[] param = {this.nom_produit,this.categorie,Float.toString(this.prix_unitaire), Integer.toString(this.quantite), newClassLogin};
                 requeteInsert = "INSERT INTO ecommerce.produit"
                     + "(id_produit,nom_produit,categorie,prix_unitaire,description,quantite,login)"
                     + "VALUES (NULL,?,?,?,NULL,?,?)";
                 paramInsert=param;
             }else {
-                 String[] param = {this.nom_produit,this.categorie, Float.toString(this.prix_unitaire),description, Integer.toString(this.quantite), this.login};
+                 String[] param = {this.nom_produit,this.categorie, Float.toString(this.prix_unitaire),description, Integer.toString(this.quantite), newClassLogin};
                  requeteInsert = "INSERT INTO ecommerce.produit"
                     + "(id_produit,nom_produit,categorie,prix_unitaire,description,quantite,login)"
                     + "VALUES (NULL,?,?,?,?,?,?)";
@@ -83,15 +84,16 @@ public class Produit implements Serializable {
             }
             b.closeConnect();
         } else {
-            FacesContext.getCurrentInstance().addMessage("msg",new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning!", "Nom déjà existant pour ce produit choisi est déjà utilisé"));
+            
+            FacesContext.getCurrentInstance().addMessage("msg",new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning!", "Ce produit existe déjà"));
             System.out.println("Erreur nom en doublon");
-            FacesContext.getCurrentInstance().addMessage("nom",new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning!", "Veuillez en inscrire un autre nom de produit"));
+            FacesContext.getCurrentInstance().addMessage("nom",new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning!", "Veuillez en inscrire un autre produit"));
         
         }
     }
 
-    public boolean testBDDNom() throws InstantiationException, SQLException, IllegalAccessException {
-        String requeteTest = "SELECT count(*) FROM  ecommerce.produit WHERE nom_produit='"+nom_produit+"' AND categorie='"+categorie+"'";
+    public boolean testBDDNom(String newClassLogin) throws InstantiationException, SQLException, IllegalAccessException {
+        String requeteTest = "SELECT count(*) FROM  ecommerce.produit WHERE nom_produit='"+nom_produit+"' AND categorie='"+categorie+"' AND login='"+newClassLogin+"'";
         ConnectBDD c = new ConnectBDD();
         c.executeRequete(requeteTest, null);
         ResultSet res = c.getResultat();

@@ -66,6 +66,14 @@
                             </div>
                         </f:facet>
 
+                        <h:form>
+                            <p:messages id="msg" showDetail="true" autoUpdate="true" closable="true" />
+                            <h:panelGrid id="formProduit" styleClass="panel_center" columns="3" cellpadding="5">
+                                <h:outputStylesheet name="Ecommerce.css" />
+                                <p:outputLabel for="nom" value="Nom du produit :" />
+                                <p:inputMask id="nom" value="#{produit.nom_produit}" required="true" mask=""/>
+                                <p:message for="nom"/>
+
                                 <p:outputLabel for="cat" value="Catégorie :" />
                                 <p:selectOneMenu id="cat" value="#{produit.categorie}" required ="true" style="width:225px">
                                     <f:selectItem itemLabel="Votre Catégorie" itemValue="" />
@@ -76,7 +84,7 @@
                                 <p:message for="cat"/>
 
                                 <p:outputLabel for="prx" value="Prix Unitaire :" />
-                                <p:inputMask id="prx" value="#{produit.prix_unitaire}"  required="true" mask=""/>
+                                <p:inputMask id="prx" value="#{produit.prix_unitaire}"  required="true" mask="" />
                                 <p:message for="prx"/>
 
 
@@ -87,20 +95,9 @@
                                 <p:outputLabel for="quantite" value="Quantité ajoutée :" />
                                 <p:spinner id="quantite" value="#{produit.quantite}" min='1' required="true" />
                                 <p:message for="quantite"/>
-
-                                <p:outputLabel for="fournisseur"  value="Login : " />
-                                <p:inputMask id="fournisseur" value="#{produit.login}" required="true" mask=""/>
-
-                                <p:message for="fournisseur"/>
-
+                                
                                 <p:commandButton value="Réinitialiser" type="reset" styleClass="commandButton" />
-                                <p:commandButton update="formProduit" value="Ajouter Produit" actionListener="#{produit.saveProduit()}" styleClass="commandButton"/>
-                                <p:dialog header="Values" resizable="false" showEffect="fade" widgetVar="dlg">
-                                    <p:panelGrid id="output" columns="2" columnClasses="label, value">
-                                        <h:outputText value="Simple:" />
-                                        <h:outputText value="#{fournisseur.getLogin()}" />
-                                    </p:panelGrid>
-                                </p:dialog>
+                                <p:commandButton update="formProduit" value="Ajouter Produit" actionListener="#{produit.addProduit(newClass.login)}" styleClass="commandButton"/>
                             </h:panelGrid>
                         </h:form>
                     </p:layoutUnit>
