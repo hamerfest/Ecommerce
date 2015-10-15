@@ -74,11 +74,11 @@
                                     <p:graphicImage value="#{produit.image}.jpg" height="100px" width="100px"/> 
 
                                     <h:outputText value="Prix : #{produit.prix_unitaire}€" style="text-align: center"/>
-
+                                    <h:outputText value="Stock : #{produit.quantite}" style="text-align: center"/>
                                     <h:panelGrid columns="3" cellpadding="5">
                                         <p:outputLabel for="quantite" value="Qté :"  />
-                                        <p:spinner id="quantite" value="0" />
-                                        <p:commandButton icon="ui-icon-check" />
+                                        <p:spinner id="quantite" value="#{produit.quantiteSelected}" min="1" max ="#{produit.quantite}"/>
+                                        <p:commandButton icon="ui-icon-check"  value="Ajouter au Panier" actionListener="#{newClass.addProduitPanier(produit.id_produit,produit.quantiteSelected)}"/>
                                     </h:panelGrid>
 
                                 </h:panelGrid>

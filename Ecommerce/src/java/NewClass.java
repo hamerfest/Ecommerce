@@ -30,6 +30,23 @@ public class NewClass implements Serializable{
     private String login;
     private String mdp;
     private String fonction;
+    private List<Produit> panier;
+//    private Integer quantiteSelected =0; 
+
+    
+   
+
+    public List<Produit> getPanier() {
+        return panier;
+    }
+
+    public void setPanier(List<Produit> panier) {
+        this.panier = panier;
+    }
+    
+    
+    
+    
     /*
      Save Personne into dataBase
     Par defaut fonction = "Client"
@@ -211,6 +228,7 @@ public class NewClass implements Serializable{
          
         if(getPersonne()!=null) {
             loggedIn = true;
+//            quantiteSelected=0;
             message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Welcome", getPersonne().getLogin());
         } else {
             loggedIn = false;

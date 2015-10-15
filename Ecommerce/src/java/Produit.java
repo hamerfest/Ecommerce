@@ -31,6 +31,23 @@ public class Produit implements Serializable {
     private String image;
     private String login;
     private Personne myFournisseur;
+    private Integer quantiteSelected =0;
+
+    public Personne getFournisseur() {
+        return fournisseur;
+    }
+
+    public void setFournisseur(Personne fournisseur) {
+        this.fournisseur = fournisseur;
+    }
+
+    public Integer getQuantiteSelected() {
+        return quantiteSelected;
+    }
+
+    public void setQuantiteSelected(Integer quantiteSelected) {
+        this.quantiteSelected = quantiteSelected;
+    }
 
     public Personne getMyFournisseur() {
         return myFournisseur;
@@ -100,6 +117,7 @@ public class Produit implements Serializable {
         while (res.next()) {
             return (res.getInt(1) >= 1);
         }
+        c.closeConnect();
         return false;
     }
 
