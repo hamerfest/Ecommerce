@@ -46,10 +46,10 @@
                         <p:menu>
 
                             <p:menuitem value="Panier" url="http://www.primefaces.org/showcase-labs/ui/home.jsf" />
-                            <p:menuitem value="Connexion" url="http://localhost:8080/Ecommerce/faces/Connexion.xhtml" />
-                            <p:menuitem value="Nouvel Utilisateur" url="http://localhost:8080/Ecommerce/faces/Formulaire_Utilisateur.xhtml" />
-                            <p:menuitem value="Themes" url="http://www.primefaces.org/themes.html" />
-                            <p:menuitem value="Test Utilisateur" url="http://localhost:8080/Ecommerce/faces/Utilisateur.xhtml" />
+                                <p:menuitem value="Connexion" url="http://localhost:8080/Ecommerce/faces/Connexion.xhtml" />
+                                <p:menuitem value="Nouvel Utilisateur" url="http://localhost:8080/Ecommerce/faces/Formulaire_Utilisateur.xhtml" />
+                                <p:menuitem value="Themes" url="http://localhost:8080/Ecommerce/faces/Utilisateur.xhtml" />
+                                <p:menuitem value="Ajout Produit" url="http://localhost:8080/Ecommerce/faces/Ajout_Produit.xhtml" />
                         </p:menu>
 
                         <p:menuButton value="Options" style="margin-top: 2%; ">
@@ -98,7 +98,7 @@
                                 <p:message for="mdp" />
                                 
                                 <p:commandButton value="Réinitialiser" type="reset" styleClass="commandButton" />
-                                <p:commandButton update="formUser" value="Enregistrer" actionListener="#{personne.savePersonne}" styleClass="commandButton" />
+                                <p:commandButton update="formUser" value="Enregistrer" icon="ui-icon-check" actionListener="#{personne.savePersonne}" styleClass="commandButton" />
                                 <!--update="display"  oncomplete="PF('dlg').show()"/>-->
 
                             </h:panelGrid>
