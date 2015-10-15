@@ -27,6 +27,8 @@ public class Produit implements Serializable {
     private float prix_unitaire;
     private String description;
     private int quantite;
+    private Personne fournisseur;
+    private String image;
     private String login;
     private Personne myFournisseur;
 
@@ -134,6 +136,7 @@ public class Produit implements Serializable {
             prod.setNom_produit(res.getString("nom_produit"));
             prod.setPrix_unitaire(res.getFloat("prix_unitaire"));
             prod.setQuantite(res.getInt("quantite"));
+            prod.setImage("resources/"+res.getString("image"));
             /*Personne*/
             Personne pers = new Personne();
             pers.setId_personne(res.getInt("id_personne"));
@@ -251,6 +254,14 @@ public class Produit implements Serializable {
      */
     public Integer getId_produit() {
         return id_produit;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     /**

@@ -46,10 +46,10 @@
                         <p:menu>
 
                             <p:menuitem value="Panier" url="http://www.primefaces.org/showcase-labs/ui/home.jsf" />
-                            <p:menuitem value="Connexion" url="http://localhost:8080/Ecommerce/faces/Connexion.xhtml" />
-                            <p:menuitem value="Nouvel Utilisateur" url="http://localhost:8080/Ecommerce/faces/Formulaire_Utilisateur.xhtml" />
-                            <p:menuitem value="Themes" url="http://www.primefaces.org/themes.html" />
-                            <p:menuitem value="Test Utilisateur" url="http://localhost:8080/Ecommerce/faces/Utilisateur.xhtml" />
+                                <p:menuitem value="Connexion" url="http://localhost:8080/Ecommerce/faces/Connexion.xhtml" />
+                                <p:menuitem value="Nouvel Utilisateur" url="http://localhost:8080/Ecommerce/faces/Formulaire_Utilisateur.xhtml" />
+                                <p:menuitem value="Themes" url="http://localhost:8080/Ecommerce/faces/Utilisateur.xhtml" />
+                                <p:menuitem value="Ajout Produit" url="http://localhost:8080/Ecommerce/faces/Ajout_Produit.xhtml" />
                         </p:menu>
 
                         <p:menuButton value="Options" style="margin-top: 2%; ">
@@ -59,11 +59,12 @@
                     </p:layoutUnit>
 
                     <p:layoutUnit position="center">
-                        <div style="text-align: center">
-                            Formulaire de nouvel utilisateur !
-                        </div>
-                        
-                        <p:separator />
+                        <f:facet name="header">
+                            <div style='text-align: center'>
+                                Formulaire de nouvel utilisateur !
+                            </div>
+                        </f:facet>
+                       
                         <h:form>
                             <p:messages id="msg" showDetail="false" autoUpdate="true" closable="true" />
                             <h:panelGrid id="formUser" styleClass="panel_center" columns="3" cellpadding="5">
