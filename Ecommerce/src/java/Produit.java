@@ -67,6 +67,7 @@ public class Produit implements Serializable {
         return getListProduit("Fromage");
     }
     
+    
      /**
      *
      * @param categorie Saucisson , Pâté ou Fromage

@@ -62,11 +62,13 @@
                     </p:layoutUnit>
 
                     <p:layoutUnit position="center">
+
+                        <p:galleria value="#{produit.getListProduit('Fromage')}" var="p" panelWidth="1100" panelHeight="313" showCaption="true" style="margin: 0 auto; text-align: center ">
+                            <p:graphicImage value="#{p.image}.jpg" alt="Description du produit: #{p.description}" title="#{p.nom_produit}" style="text-align: center"/>
+                        </p:galleria>
+
                         
-                      <p:contentFlow value="#{produit.getListProduit('Saucisson')}" var="produit">
-                            <p:graphicImage value="#{produit.image}" styleClass="content"/>
-                            <div class="caption">#{produit.image}</div>
-                      </p:contentFlow>
+
                     </p:layoutUnit>
 
                 </p:layout>
