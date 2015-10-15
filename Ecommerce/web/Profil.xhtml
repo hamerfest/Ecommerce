@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
@@ -32,7 +33,7 @@
                                      vertical-align: top" placeholder="Rechercher"/> 
 
                         <p:commandButton value="Rechercher" update="" icon="ui-icon-search" styleClass="commandButton" />
-                       
+
 
                         <p:growl id="messages" showDetail="true" />
 
@@ -70,26 +71,61 @@
                     </p:layoutUnit>
 
                     <p:layoutUnit position="center">
-                        
+
                         <f:facet name="header">
-                            <div style='text-align: center' margin-bottom='1%'>
-                                Bienvenue !
+                            <div style='text-align: center'>
+                                Mon Profil:
                             </div>
                         </f:facet>
-                        
-                        <div style='text-align: center'>
-                            <h3> Venez commander nos savoureux produits du terroir ! </h3>
-                        </div>
-                        <p:galleria value="#{produit.getListProduit('Fromage')}" var="p" panelWidth="1100" panelHeight="313" showCaption="true" style="margin: 0 auto; text-align: center ">
-                            <p:graphicImage value="#{p.image}.jpg" alt="Description du produit: #{p.description}" title="#{p.nom_produit}" style="text-align: center"/>
-                        </p:galleria>
 
+                        <div style="margin-left: 40%">
+
+                            <p:panelGrid columns="2" style="text-align: center">
+                                <f:facet name="header">
+                                    <p:graphicImage value="resources/indisponible.jpg" />
+                                </f:facet>
+
+                                <h:outputText value="Nom :" />
+                                <h:outputText value="#{newClass.nom}" />
+
+                                <h:outputText value="Prénom :" />
+                                <h:outputText value="#{newClass.prenom}" />
+
+                                <h:outputText value="Fonction :" />
+                                <h:outputText value="#{newClass.fonction}" />
+
+                                <h:outputText value="Login :" />
+                                <h:outputText value="#{newClass.login}" />
+
+                                <h:outputText value="Mot de passe :" />
+                                <h:outputText value="#{newClass.mdp}" />
+                                <f:facet name="footer">
+                                    <p:commandButton value="Modification mot de passe" icon='ui-icon-gear' action="ModifMDP.xhtml?faces-redirect=true"/>
+                                </f:facet>
+                            </p:panelGrid>
+
+
+                            
+
+
+                        </div>
                     </p:layoutUnit>
 
                 </p:layout>
             </h:form>
-            
-            
+
+            <script type="text/javascript">
+                function handleLoginRequest(xhr, status, args) {
+                    if (args.validationFailed || !args.loggedIn) {
+                        PF('dlg').jq.effect("shake", {times: 5}, 100);
+                    }
+                    else {
+                        PF('dlg').hide();
+                        $('#loginLink').fadeOut();
+                    }
+                }
+            </script>
+
         </h:body>
 
     </f:view>

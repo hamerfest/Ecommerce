@@ -17,7 +17,9 @@ import org.primefaces.context.RequestContext;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.inject.Named;
 
+@Named
 @SessionScoped
 @ManagedBean
 public class NewClass implements Serializable{
@@ -210,6 +212,9 @@ public class NewClass implements Serializable{
         boolean loggedIn = false;
          
         if(getPersonne()!=null) {
+            nom= getPersonne().getNom();
+            prenom= getPersonne().getPrenom();
+            fonction= getPersonne().getFonction();
             loggedIn = true;
             message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Welcome", getPersonne().getLogin());
         } else {
@@ -220,5 +225,14 @@ public class NewClass implements Serializable{
         FacesContext.getCurrentInstance().addMessage(null, message);
         context.addCallbackParam("loggedIn", loggedIn);
     }   
+ 
+  public void Modif (String login) throws SQLException, InstantiationException, IllegalAccessException {
+         
+        String[] param = {mdp, login};
+        String requeteSelect = "UPDATE personne SET mdp=? WHERE login =?";
+        ConnectBDD b =new ConnectBDD();
+        b.executeRequete(requeteSelect,param);
+        
+    }
      
     }

@@ -45,10 +45,10 @@
                         <p:menu>
 
                             <p:menuitem value="Panier" url="http://www.primefaces.org/showcase-labs/ui/home.jsf" />
-                                <p:menuitem value="Connexion" url="http://localhost:8080/Ecommerce/faces/Connexion.xhtml" />
-                                <p:menuitem value="Nouvel Utilisateur" url="http://localhost:8080/Ecommerce/faces/Formulaire_Utilisateur.xhtml" />
-                                <p:menuitem value="Themes" url="http://localhost:8080/Ecommerce/faces/Utilisateur.xhtml" />
-                                <p:menuitem value="Ajout Produit" url="http://localhost:8080/Ecommerce/faces/Ajout_Produit.xhtml" />
+                            <p:menuitem value="Connexion" url="http://localhost:8080/Ecommerce/faces/Connexion.xhtml" />
+                            <p:menuitem value="Nouvel Utilisateur" url="http://localhost:8080/Ecommerce/faces/Formulaire_Utilisateur.xhtml" />
+                            <p:menuitem value="Themes" url="http://localhost:8080/Ecommerce/faces/Utilisateur.xhtml" />
+                            <p:menuitem value="Ajout Produit" url="http://localhost:8080/Ecommerce/faces/Ajout_Produit.xhtml" />
 
                         </p:menu>
 
@@ -69,16 +69,15 @@
                         <h:panelGrid styleClass="panel_center" columns="2" cellpadding="5">
                             <h:outputStylesheet name="Ecommerce.css" />
 
-                            <p:outputLabel for="login"  value="Login : " />
-                            <p:inputMask id="login" value="#{personne.login}" mask=""/>
+                            <h:outputLabel for="username" value="Nouveau Mot de passe:" />
+                            <p:inputText id="username" value="#{newClass.mdp}" required="true" label="username" />
 
-                            <p:outputLabel for="mdp"  value="Mot de passe : " />
-                            <p:inputMask id="mdp" value="#{personne.mdp}" mask=""/>
-
-                            <p:commandButton value="Réinitialiser" type="reset" />
-                            <p:commandButton value="Connexion" icon="ui-icon-check" update="display" oncomplete="PF('dlg').show()" />
-
+                            <f:facet name="footer">
+                                <p:commandButton value="Modifier"  action="#{newClass.Modif(newClass.login)}"/>
+                            </f:facet>  
                         </h:panelGrid>
+
+
 
                     </p:layoutUnit>
 
