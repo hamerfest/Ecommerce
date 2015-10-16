@@ -43,14 +43,14 @@ and open the template in the editor.
                         <p:growl id="messages" showDetail="true" />
 
                         <c:if test="${(newClass.fonction=='client')}">"
-                        <p:menubar styleClass="menu">
-                            <p:menuitem value="Nos Saucissons" url="http://localhost:8080/Ecommerce/faces/Saucissons.xhtml" />
+                            <p:menubar styleClass="menu">
+                                <p:menuitem value="Nos Saucissons" url="http://localhost:8080/Ecommerce/faces/Saucissons.xhtml" />
 
-                            <p:menuitem value="Nos Fromages" url="http://localhost:8080/Ecommerce/faces/Fromages.xhtml"/>
+                                <p:menuitem value="Nos Fromages" url="http://localhost:8080/Ecommerce/faces/Fromages.xhtml"/>
 
-                            <p:menuitem value="Nos Pâtés" url="http://localhost:8080/Ecommerce/faces/Pates.xhtml"/>
+                                <p:menuitem value="Nos Pâtés" url="http://localhost:8080/Ecommerce/faces/Pates.xhtml"/>
 
-                        </p:menubar>
+                            </p:menubar>
                         </c:if>     
                     </p:layoutUnit>
 
@@ -82,40 +82,66 @@ and open the template in the editor.
                                 </c:if>
                             </p:menuButton>
                         </c:if>
+                    </p:layoutUnit>
 
                     <p:layoutUnit position="center">
-                        <p:tab title="Liste des pâtés">  
-
-                            <p:dataTable id="dataTable" var="produit" value="#{produit.getListProduit('Pâté')}" sortMode="multiple" rows="5" paginator="true">  
+                        <h:form id="form"> 
+                            <p:growl id="msgs" showDetail="true"/>
+                            <p:dataTable id="dataTable" var="produit" value="#{produit.getListProduit('Pâté')}" editable="true" sortMode="multiple" rows="5" paginator="true">  
                                 <f:facet name="header">  
                                     Pâtés
-                                </f:facet>  
+                                </f:facet>
 
-                                <p:column sortBy="id_produit" headerText="N° MySQL">  
-                                    <h:outputText value="#{produit.id_produit}" />  
+                                <p:ajax event="rowEdit" listener="#{Produit.onRowEdit}" update=":form:msgs" />
+                                <p:ajax event="rowEditCancel" listener="#{Produit.onRowCancel}" update=":form:msgs" />
+
+                                <p:column sortBy="id_produit" headerText="N° MySQL">
+                                    <p:cellEditor>
+                                        <f:facet name="output"><h:outputText value="#{produit.id_produit}" /> </f:facet>
+                                        <f:facet name="input"><p:inputText id="modelInput" value="#{produit.id_produit}" style="width:100%"/></f:facet>
+                                    </p:cellEditor>
                                 </p:column>  
 
                                 <p:column sortBy="nom_produit" headerText="Nom Produit">  
-                                    <h:outputText value="#{produit.nom_produit}" />  
+                                    <p:cellEditor>
+                                        <f:facet name="output"><h:outputText value="#{produit.nom_produit}"/> </f:facet>
+                                        <f:facet name="input"><p:inputText value="#{produit.nom_produit}" style="width:100%" /></f:facet>
+                                    </p:cellEditor>
                                 </p:column>  
 
                                 <p:column sortBy="description" headerText="Description">  
-                                    <h:outputText value="#{produit.description}" />  
+                                    <p:cellEditor>
+                                        <f:facet name="output"> <h:outputText value="#{produit.description}" /> </f:facet>
+                                        <f:facet name="input"> <p:inputText value="#{produit.description}" style="width:100%" /></f:facet>
+                                    </p:cellEditor>
                                 </p:column>
 
                                 <p:column sortBy="login" headerText="Fournisseur">  
-                                    <h:outputText value="#{produit.login}" />  
+                                    <p:cellEditor>
+                                        <f:facet name="output"><h:outputText value="#{produit.login}" /> </f:facet>
+                                        <f:facet name="input"><p:inputText value="#{produit.login}" style="width:100%" /></f:facet>   
+                                    </p:cellEditor>
                                 </p:column>
 
                                 <p:column sortBy="prix_unitaire" headerText="Prix">  
-                                    <h:outputText value="#{produit.prix_unitaire}" />  
+                                    <p:cellEditor>
+                                        <f:facet name="output"><h:outputText value="#{produit.prix_unitaire}" /> </f:facet>
+                                        <f:facet name="input"><p:inputText value="#{produit.prix_unitaire}" style="width:100%" /></f:facet>   
+                                    </p:cellEditor>
                                 </p:column>
                                 <p:column sortBy="quantite" headerText="Stock">  
-                                    <h:outputText value="#{produit.quantite}" />  
+                                    <p:cellEditor>
+                                        <f:facet name="output"><h:outputText value="#{produit.quantite}" /></f:facet>
+                                        <f:facet name="input"><p:inputText value="#{produit.quantite}" style="width:100%" /></f:facet>   
+                                    </p:cellEditor>
                                 </p:column>
 
+                                <p:column style="width:32px">
+                                    <p:rowEditor />
+                                </p:column>
                             </p:dataTable>
-                        </p:tab>
+
+                        </h:form>       
                     </p:layoutUnit>
 
                 </p:layout>

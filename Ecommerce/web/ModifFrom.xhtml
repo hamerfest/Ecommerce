@@ -5,12 +5,140 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <title>TODO supply a title</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui" xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      >
+    <f:view contentType="text/html">
+        <h:head>
+            <link rel="stylesheet" type="text/css" href="resources/Ecommerce.css" title="Ecommerce" />
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Liste des Fromages</title>
+            </f:facet>
+        </h:head>
+
+        <h:body >
+
+            <h:form> 
+                <p:layout fullPage="true" >
+                    <h:outputStylesheet name="Ecommerce.css" />
+
+                    <p:layoutUnit  styleClass="layoutNorth" position="north" size="150" resizable="false" closable="false" collapsible="false" >
+                        <img src="resources/J2EE.png" width="150" height="65" vertical-align="top" margin-left="5" />                        
+
+                        <p:inputText style="margin-left: 29%;
+                                     margin-bottom: 1%;
+                                     margin-top: 1%;
+                                     vertical-align: top" placeholder="Rechercher"/> 
+
+                        <p:commandButton value="Rechercher" update="" icon="ui-icon-search" styleClass="commandButton" />
+
+                        <c:if test="${newClass.login!=' '}">
+                            <p:commandButton value="Déconnexion" icon='ui-icon-cancel' action="index.xhtml?faces-redirect=true"  style=" margin-left: 18%; margin-bottom: 1%;margin-top: 1%;vertical-align: top"/>
+                        </c:if>
+
+                        <p:growl id="messages" showDetail="true" />
+
+                        <c:if test="${(newClass.fonction=='client')}">"
+                            <p:menubar styleClass="menu">
+                                <p:menuitem value="Nos Saucissons" url="http://localhost:8080/Ecommerce/faces/Saucissons.xhtml" />
+
+                                <p:menuitem value="Nos Fromages" url="http://localhost:8080/Ecommerce/faces/Fromages.xhtml"/>
+
+                                <p:menuitem value="Nos Pâtés" url="http://localhost:8080/Ecommerce/faces/Pates.xhtml"/>
+
+                            </p:menubar>
+                        </c:if>     
+                    </p:layoutUnit>
+
+                    <p:layoutUnit position="east" size="175" header="Menu" collapsible="false" >
+                        <p:menu >
+                            <p:menuitem value="Mon profil" url="http://localhost:8080/Ecommerce/faces/Profil.xhtml"/>
+                            <c:if test="${newClass.fonction=='client'}">
+                                <p:menuitem value="Panier" url="http://www.primefaces.org/showcase-labs/ui/home.jsf" />
+                            </c:if>
+                            <p:menuitem value="Accueil" url="http://localhost:8080/Ecommerce/faces/welcomePrimefaces.xhtml"  />
+                        </p:menu>
+
+                        <c:if test="${(newClass.fonction=='admin' || newClass.fonction=='fournisseur')}">
+                            <p:menuButton value="Ajout" style="margin-top: 2%; ">
+                                <p:menuitem value="Ajout Produit" url="http://localhost:8080/Ecommerce/faces/Ajout_Produit.xhtml" />
+                                <c:if test="${(newClass.fonction=='admin')}">
+                                    <p:menuitem value="Nouvel Utilisateur" url="http://localhost:8080/Ecommerce/faces/Formulaire_Utilisateur.xhtml" />
+                                </c:if>
+                            </p:menuButton>
+                        </c:if>
+
+                        <c:if test="${(newClass.fonction=='admin' || newClass.fonction=='fournisseur')}"> 
+                            <p:menuButton value="Visualisation" style="margin-top: 2%; ">
+                                <p:menuitem value="Saucissons" url="http://localhost:8080/Ecommerce/faces/VisuSauci.xhtml" />
+                                <p:menuitem value="Pâtés" url="http://localhost:8080/Ecommerce/faces/VisuPate.xhtml"  />
+                                <p:menuitem value="Fromages" url="http://localhost:8080/Ecommerce/faces/VisuFrom.xhtml"  />
+                                <c:if test="${(newClass.fonction=='admin')}">
+                                    <p:menuitem value="Utilisateurs" url="http://localhost:8080/Ecommerce/faces/Utilisateur.xhtml" />
+                                </c:if>
+                            </p:menuButton>
+                        </c:if>
+                    </p:layoutUnit>
+
+                    <p:layoutUnit position="center">
+                        <p:tab title="Liste des fromages">  
+
+                            <p:dataTable id="dataTable" var="produit" value="#{produit.getListProduit('Fromage')}" sortMode="multiple" rows="5" paginator="true">  
+                                <f:facet name="header">  
+                                    Fromages
+                                </f:facet>  
+
+                                <p:column sortBy="id_produit" headerText="N° MySQL">  
+                                    <h:outputText value="#{produit.id_produit}" />  
+                                </p:column>  
+
+                                <p:column sortBy="nom_produit" headerText="Nom Produit">  
+                                    <h:outputText value="#{produit.nom_produit}" />  
+                                </p:column>  
+
+                                <p:column sortBy="description" headerText="Description">  
+                                    <h:outputText value="#{produit.description}" />  
+                                </p:column>
+
+                                <p:column sortBy="login" headerText="Fournisseur">  
+                                    <h:outputText value="#{produit.login}" />  
+                                </p:column>
+
+                                <p:column sortBy="prix_unitaire" headerText="Prix">  
+                                    <h:outputText value="#{produit.prix_unitaire}" />  
+                                </p:column>
+                                <p:column sortBy="quantite" headerText="Stock">  
+                                    <h:outputText value="#{produit.quantite}" />  
+                                </p:column>
+                                <h:outputText value="#{produit.prix_unitaire}"/>
+                            </p:dataTable>
+                        </p:tab>
+
+                        <p:panelGrid columns="2" style="text-align: center" styleClass="panel_center">
+                            <f:facet name="header">
+                                Choix de la ligne à modifier
+                            </f:facet>
+                            <h:outputText value="ID de la ligne :"/>
+                            <p:inputText value="#{produit.id_produit}"/>
+                            
+                            <h:outputText value="Nouvelle Quantité :"/>
+                            <p:inputText value="#{produit.quantite}"/>                    
+                            
+                            <f:facet name="footer">
+                                <div align="center">
+                                <p:commandButton value="Modifier" icon='ui-icon-gear' action="#{produit.ModifProduit()}"/>
+                                </div>
+                            </f:facet>
+                        </p:panelGrid>
+
+                    </p:layoutUnit>
+
+                </p:layout>
+            </h:form>
+        </h:body>
+    </f:view>
 </html>
