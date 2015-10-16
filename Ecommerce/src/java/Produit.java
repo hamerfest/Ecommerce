@@ -13,10 +13,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.scene.control.TableColumn.CellEditEvent;
 import javax.faces.application.FacesMessage;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
+import org.primefaces.event.RowEditEvent;
 
 @ManagedBean
 public class Produit implements Serializable {
@@ -324,6 +326,13 @@ public class Produit implements Serializable {
         this.image = image;
     }
 
+    @Override
+    public String toString() {
+        return "Produit{" + "id_produit=" + id_produit + '}';
+    }
+
+    
+    
     /**
      * Set the value of id_produit
      *
@@ -332,5 +341,15 @@ public class Produit implements Serializable {
     public void setId_produit(Integer id_produit) {
         this.id_produit = id_produit;
     }
+    
+  public void ModifProduit() throws SQLException, InstantiationException, IllegalAccessException {
+        FacesMessage message = null;
+        String[] param = null;
+        String requeteSelect = "UPDATE produit SET quantite="+Integer.toString(quantite)+" WHERE id_produit="+Integer.toString(id_produit)+"";
+        ConnectBDD b = new ConnectBDD();
+        b.executeRequete(requeteSelect, param);
+        message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Félicitations !", "Votre quantité du produit ayant pour id:"+id_produit+" a été modifié:"+ quantite);
+        FacesContext.getCurrentInstance().addMessage("msg" , message);
 
+}
 }
