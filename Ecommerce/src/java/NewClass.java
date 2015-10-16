@@ -232,7 +232,7 @@ public class NewClass implements Serializable {
         ConnectBDD b = new ConnectBDD();
         b.executeRequete(requeteSelect, param);
         message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Félicitations !", "Votre mot de passe a été modifié:"+ mdp);
-        FacesContext.getCurrentInstance().addMessage(null, message);
+        FacesContext.getCurrentInstance().addMessage("msg" , message);
 
     }
 
