@@ -10,7 +10,7 @@
             <link rel="stylesheet" type="text/css" href="resources/Ecommerce.css" title="Ecommerce" />
             <f:facet name="first">
                 <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
-                <title>Formulaire nouveau compte</title>
+                <title>Connexion</title>
             </f:facet>
         </h:head>
 
@@ -78,49 +78,27 @@
                     </p:layoutUnit>
 
                     <p:layoutUnit position="center">
+
+                        <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
                         <f:facet name="header">
                             <div style='text-align: center'>
-                                Formulaire de nouvel utilisateur !
+                                Connectez-vous !
                             </div>
-                        </f:facet>
-                       
-                        <h:form>
-                            <p:messages id="msg" showDetail="true" autoUpdate="true" closable="true" />
-                            <h:panelGrid id="formUser" styleClass="panel_center" columns="3" cellpadding="5">
-          <h:outputStylesheet name="Ecommerce.css" />  
-          
-          <p:outputLabel for="prenom" value="Prénom: " />
-                                <p:inputMask id="prenom" value="#{personne.prenom}" required="true" mask=""/>
-                                <p:message for="prenom" />
+                        </f:facet>              
 
-                                <p:outputLabel for="nom" value="Nom:" />
-                                <p:inputMask id="nom" value="#{personne.nom}" required="true" mask=""/>
-                                <p:message for="nom" />
-                                
-                                <p:outputLabel for="adresse" value="Adresse:" />
-                                <p:inputMask id="adresse" value="#{personne.adresse}" required="true" mask=""/>
-                                <p:message for="adresse" />
-                                
-                                <p:outputLabel for="cdp" value="Code Postal" />
-                                <p:inputMask id="cdp" value="#{personne.cdp}" required="true" mask="99999"/>
-                                <p:message for="cdp" />
-                                
-                                <p:outputLabel for="ville" value="Ville:" />
-                                <p:inputMask id="ville" value="#{personne.ville}" required="true" mask=""/>
-                                <p:message for="ville" />
-                                
-                                <p:outputLabel for="login"  value="Login : " />
-                                <p:inputMask id="login" value="#{personne.login}" required="true" mask=""/>
-                                <p:message for="login" />
-                                
-                                <p:outputLabel for="mdp"  value="Mot de passe : " />
-                                <p:password id="mdp" value="#{personne.mdp}" required="true" />
-                                <p:message for="mdp" />
-                                
-                                <p:commandButton value="Réinitialiser" type="reset" styleClass="commandButton" />
-                                <p:commandButton update="formUser" value="Enregistrer" actionListener="#{personne.savePersonne}" styleClass="commandButton" />
-                            </h:panelGrid>
-                        </h:form>
+                        <h:panelGrid styleClass="panel_center" columns="2" cellpadding="5">
+                            <h:outputStylesheet name="Ecommerce.css" />
+
+                            <h:outputLabel for="username" value="Nouveau Mot de passe:" />
+                            <p:inputText id="username" value="#{newClass.mdp}" required="true" label="username" />
+
+                            <f:facet name="footer">
+                                <p:commandButton value="Modifier"  action="#{newClass.Modif(newClass.login)}"/>
+                            </f:facet>  
+                        </h:panelGrid>
+
+
+
                     </p:layoutUnit>
 
                 </p:layout>
@@ -129,4 +107,3 @@
 
     </f:view>
 </html>
-

@@ -1,22 +1,30 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui" xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
-
+      xmlns:p="http://primefaces.org/ui" xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      >
     <f:view contentType="text/html">
         <h:head>
             <link rel="stylesheet" type="text/css" href="resources/Ecommerce.css" title="Ecommerce" />
             <f:facet name="first">
                 <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
-                <title>Formulaire nouveau compte</title>
+                <title>Liste des Saucissons</title>
             </f:facet>
         </h:head>
 
-        <h:body>
-            <h:form>
-                <p:layout fullPage="true">
+        <h:body >
+
+            <h:form> 
+                <p:layout fullPage="true" >
+                    <h:outputStylesheet name="Ecommerce.css" />
 
                     <p:layoutUnit  styleClass="layoutNorth" position="north" size="150" resizable="false" closable="false" collapsible="false" >
                         <img src="resources/J2EE.png" width="150" height="65" vertical-align="top" margin-left="5" />                        
@@ -78,55 +86,42 @@
                     </p:layoutUnit>
 
                     <p:layoutUnit position="center">
-                        <f:facet name="header">
-                            <div style='text-align: center'>
-                                Formulaire de nouvel utilisateur !
-                            </div>
-                        </f:facet>
-                       
-                        <h:form>
-                            <p:messages id="msg" showDetail="true" autoUpdate="true" closable="true" />
-                            <h:panelGrid id="formUser" styleClass="panel_center" columns="3" cellpadding="5">
-          <h:outputStylesheet name="Ecommerce.css" />  
-          
-          <p:outputLabel for="prenom" value="Prénom: " />
-                                <p:inputMask id="prenom" value="#{personne.prenom}" required="true" mask=""/>
-                                <p:message for="prenom" />
+                        <p:tab title="Liste des saucissons">  
 
-                                <p:outputLabel for="nom" value="Nom:" />
-                                <p:inputMask id="nom" value="#{personne.nom}" required="true" mask=""/>
-                                <p:message for="nom" />
-                                
-                                <p:outputLabel for="adresse" value="Adresse:" />
-                                <p:inputMask id="adresse" value="#{personne.adresse}" required="true" mask=""/>
-                                <p:message for="adresse" />
-                                
-                                <p:outputLabel for="cdp" value="Code Postal" />
-                                <p:inputMask id="cdp" value="#{personne.cdp}" required="true" mask="99999"/>
-                                <p:message for="cdp" />
-                                
-                                <p:outputLabel for="ville" value="Ville:" />
-                                <p:inputMask id="ville" value="#{personne.ville}" required="true" mask=""/>
-                                <p:message for="ville" />
-                                
-                                <p:outputLabel for="login"  value="Login : " />
-                                <p:inputMask id="login" value="#{personne.login}" required="true" mask=""/>
-                                <p:message for="login" />
-                                
-                                <p:outputLabel for="mdp"  value="Mot de passe : " />
-                                <p:password id="mdp" value="#{personne.mdp}" required="true" />
-                                <p:message for="mdp" />
-                                
-                                <p:commandButton value="Réinitialiser" type="reset" styleClass="commandButton" />
-                                <p:commandButton update="formUser" value="Enregistrer" actionListener="#{personne.savePersonne}" styleClass="commandButton" />
-                            </h:panelGrid>
-                        </h:form>
+                            <p:dataTable id="dataTable" var="produit" value="#{produit.getListProduit('Saucisson')}" sortMode="multiple" rows="5" paginator="true">  
+                                <f:facet name="header">  
+                                    Saucissons  
+                                </f:facet>  
+
+                                <p:column sortBy="id_produit" headerText="N° MySQL">  
+                                    <h:outputText value="#{produit.id_produit}" />  
+                                </p:column>  
+
+                                <p:column sortBy="nom_produit" headerText="Nom Produit">  
+                                    <h:outputText value="#{produit.nom_produit}" />  
+                                </p:column>  
+
+                                <p:column sortBy="description" headerText="Description">  
+                                    <h:outputText value="#{produit.description}" />  
+                                </p:column>
+
+                                <p:column sortBy="login" headerText="Fournisseur">  
+                                    <h:outputText value="#{produit.login}" />  
+                                </p:column>
+
+                                <p:column sortBy="prix_unitaire" headerText="Prix">  
+                                    <h:outputText value="#{produit.prix_unitaire}" />  
+                                </p:column>
+                                <p:column sortBy="quantite" headerText="Stock">  
+                                    <h:outputText value="#{produit.quantite}" />  
+                                </p:column>
+
+                            </p:dataTable>
+                        </p:tab>
                     </p:layoutUnit>
 
                 </p:layout>
             </h:form>
         </h:body>
-
     </f:view>
 </html>
-
