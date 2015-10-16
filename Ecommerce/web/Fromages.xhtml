@@ -34,14 +34,14 @@
                         <p:growl id="messages" showDetail="true" />
 
                         <c:if test="${(newClass.fonction=='client')}">"
-                        <p:menubar styleClass="menu">
-                            <p:menuitem value="Nos Saucissons" url="http://localhost:8080/Ecommerce/faces/Saucissons.xhtml" />
+                            <p:menubar styleClass="menu">
+                                <p:menuitem value="Nos Saucissons" url="http://localhost:8080/Ecommerce/faces/Saucissons.xhtml" />
 
-                            <p:menuitem value="Nos Fromages" url="http://localhost:8080/Ecommerce/faces/Fromages.xhtml"/>
+                                <p:menuitem value="Nos Fromages" url="http://localhost:8080/Ecommerce/faces/Fromages.xhtml"/>
 
-                            <p:menuitem value="Nos Pâtés" url="http://localhost:8080/Ecommerce/faces/Pates.xhtml"/>
+                                <p:menuitem value="Nos Pâtés" url="http://localhost:8080/Ecommerce/faces/Pates.xhtml"/>
 
-                        </p:menubar>
+                            </p:menubar>
                         </c:if>     
                     </p:layoutUnit>
 
@@ -93,13 +93,10 @@
 
                                     <h:outputText value="Prix : #{produit.prix_unitaire}€" style="text-align: center"/>
                                     <h:outputText value="Stock : #{produit.quantite}" style="text-align: center"/>
-                                    <h:panelGrid columns="3" cellpadding="5">
-                                        <p:outputLabel for="quantite" value="Qté :"  />
-                                        <p:spinner id="quantite" value="#{produit.quantiteSelected}" min="1" max ="#{produit.quantite}"/>
-                                        <p:commandButton icon="ui-icon-check"  value="Ajouter au Panier" actionListener="#{newClass.addProduitPanier(produit.id_produit,produit.quantiteSelected)}"/>
-                                    </h:panelGrid>
-
+                                    <h:inputText value ="#{produit.quantiteSelected}" />
+                                    <p:commandButton icon="ui-icon-check"  value="Ajouter au Panier" actionListener="#{produit.addLgCommande(newClass.login,produit.id_produit,produit.quantiteSelected)}"/>
                                 </h:panelGrid>
+
                             </p:panel>
 
                         </p:dataGrid>

@@ -31,8 +31,14 @@ public class Produit implements Serializable {
     private String image;
     private String login;
     private Personne myFournisseur;
-    private Integer quantiteSelected =0;
+    private Integer quantiteSelected=0;
     private Float total;
+    
+    public void addLgCommande(String newClassLogin, Integer id_produit, Integer quantiteSelected)throws InstantiationException, IllegalAccessException, SQLException {
+        System.out.println("Parametre"+newClassLogin+" "+id_produit+" "+quantiteSelected);
+        Ligne_Commande lg =new Ligne_Commande();
+        lg.addLgCommande(newClassLogin, id_produit, quantiteSelected);
+    }
     public Personne getFournisseur() {
         return fournisseur;
     }
