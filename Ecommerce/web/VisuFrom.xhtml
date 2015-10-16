@@ -54,7 +54,7 @@ and open the template in the editor.
                         </c:if>     
                     </p:layoutUnit>
 
-                    <p:layoutUnit position="east" size="175" header="Menu" collapsible="false" >
+                   <p:layoutUnit position="east" size="175" header="Menu" collapsible="false" >
                         <p:menu >
                             <p:menuitem value="Mon profil" url="http://localhost:8080/Ecommerce/faces/Profil.xhtml"/>
                             <c:if test="${newClass.fonction=='client'}">
@@ -82,7 +82,29 @@ and open the template in the editor.
                                 </c:if>
                             </p:menuButton>
                         </c:if>
-
+                        
+                        <c:if test="${(newClass.fonction=='admin' || newClass.fonction=='fournisseur')}"> 
+                         <p:menuButton value="Modification" style="margin-top: 2%; ">
+                              <p:menuitem value="Saucissons" url="http://localhost:8080/Ecommerce/faces/ModifSauci.xhtml" />
+                              <p:menuitem value="Pâtés" url="http://localhost:8080/Ecommerce/faces/ModifPate.xhtml"  />
+                              <p:menuitem value="Fromages" url="http://localhost:8080/Ecommerce/faces/ModifFrom.xhtml"  />
+                              <c:if test="${(newClass.fonction=='admin')}">
+                              <p:menuitem value="Utilisateurs" url="http://localhost:8080/Ecommerce/faces/ModifUser.xhtml" />
+                              </c:if>
+                         </p:menuButton>
+                        </c:if>
+                        
+                        <c:if test="${(newClass.fonction=='admin' || newClass.fonction=='fournisseur')}"> 
+                         <p:menuButton value="Suppression" style="margin-top: 2%; ">
+                              <p:menuitem value="Saucissons" url="http://localhost:8080/Ecommerce/faces/SuppSauci.xhtml" />
+                              <p:menuitem value="Pâtés" url="http://localhost:8080/Ecommerce/faces/SuppPate.xhtml"  />
+                              <p:menuitem value="Fromages" url="http://localhost:8080/Ecommerce/faces/SuppFrom.xhtml"  />
+                              <c:if test="${(newClass.fonction=='admin')}">
+                              <p:menuitem value="Utilisateurs" url="http://localhost:8080/Ecommerce/faces/SuppUtilisateur.xhtml" />
+                              </c:if>
+                         </p:menuButton>
+                        </c:if>
+                       
                     </p:layoutUnit>
 
                     <p:layoutUnit position="center">

@@ -205,6 +205,26 @@ public class Personne implements Serializable{
         return false;
     }
 
+     public void ModifPersonne() throws SQLException, InstantiationException, IllegalAccessException {
+        FacesMessage message = null;
+        String[] param = null;
+        String requeteSelect = "UPDATE personne SET fonction='"+fonction+"' WHERE id_personne="+Integer.toString(id_personne)+"";
+        ConnectBDD b = new ConnectBDD();
+        b.executeRequete(requeteSelect, param);
+        message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Félicitations !", "La fonction de la personne a été modifiée:"+ fonction);
+        FacesContext.getCurrentInstance().addMessage("msg" , message);
+
+}
+     
+      public void SuppPersonne() throws SQLException, InstantiationException, IllegalAccessException {
+        FacesMessage message = null;
+        String[] param = null;
+        String requeteSelect = "DELETE FROM personne WHERE id_personne="+Integer.toString(id_personne)+"";
+        ConnectBDD b = new ConnectBDD();
+        b.executeRequete(requeteSelect, param);
+        message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Félicitations !", "Vous avez bien supprimé l'utilisateur. ID:"+ Integer.toString(id_personne));
+        FacesContext.getCurrentInstance().addMessage("msg" , message);
      
     }
+}
 

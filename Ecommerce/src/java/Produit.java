@@ -342,7 +342,18 @@ public class Produit implements Serializable {
         String requeteSelect = "UPDATE produit SET quantite="+Integer.toString(quantite)+" WHERE id_produit="+Integer.toString(id_produit)+"";
         ConnectBDD b = new ConnectBDD();
         b.executeRequete(requeteSelect, param);
-        message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Félicitations !", "Votre quantité du produit ayant pour id:"+id_produit+" a été modifié:"+ quantite);
+        message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Félicitations !", "Votre quantité du produit a été modifié:"+ Integer.toString(quantite));
+        FacesContext.getCurrentInstance().addMessage("msg" , message);
+
+}
+  
+  public void SuppProduit() throws SQLException, InstantiationException, IllegalAccessException {
+        FacesMessage message = null;
+        String[] param = null;
+        String requeteSelect = "DELETE FROM produit WHERE id_produit="+Integer.toString(id_produit)+"";
+        ConnectBDD b = new ConnectBDD();
+        b.executeRequete(requeteSelect, param);
+        message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Félicitations !", "Votre produit a bien été supprimé. ID:"+ Integer.toString(id_produit));
         FacesContext.getCurrentInstance().addMessage("msg" , message);
 
 }
