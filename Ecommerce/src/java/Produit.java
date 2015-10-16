@@ -33,14 +33,15 @@ public class Produit implements Serializable {
     private String image;
     private String login;
     private Personne myFournisseur;
-    private Integer quantiteSelected=0;
+    private Integer quantiteSelected = 0;
     private Float total;
-    
-    public void addLgCommande(String newClassLogin, Integer id_produit, Integer quantiteSelected)throws InstantiationException, IllegalAccessException, SQLException {
-        System.out.println("Parametre"+newClassLogin+" "+id_produit+" "+quantiteSelected);
-        Ligne_Commande lg =new Ligne_Commande();
+
+    public void addLgCommande(String newClassLogin, Integer id_produit, Integer quantiteSelected) throws InstantiationException, IllegalAccessException, SQLException {
+        System.out.println("Parametre" + newClassLogin + " " + id_produit + " " + quantiteSelected);
+        Ligne_Commande lg = new Ligne_Commande();
         lg.addLgCommande(newClassLogin, id_produit, quantiteSelected);
     }
+
     public Personne getFournisseur() {
         return fournisseur;
     }
@@ -72,7 +73,6 @@ public class Produit implements Serializable {
     public void setMyFournisseur(Personne myFournisseur) {
         this.myFournisseur = myFournisseur;
     }
-    
 
     public String getLogin() {
         return login;
@@ -88,24 +88,25 @@ public class Produit implements Serializable {
     public void addProduit(String newClassLogin) throws InstantiationException, IllegalAccessException, SQLException {
         System.out.println(newClassLogin);
         if (!testBDDNom(newClassLogin)) { /* Nouveau produit par le fournisseur */
+
             String[] paramInsert;
             String requeteInsert;
             /*traitement description*/
-            if (description == null || description.isEmpty() || "".equals(description)){
-                
-                String[] param = {this.nom_produit,this.categorie,Float.toString(this.prix_unitaire), Integer.toString(this.quantite), newClassLogin};
+            if (description == null || description.isEmpty() || "".equals(description)) {
+
+                String[] param = {this.nom_produit, this.categorie, Float.toString(this.prix_unitaire), Integer.toString(this.quantite), newClassLogin};
                 requeteInsert = "INSERT INTO ecommerce.produit"
-                    + "(id_produit,nom_produit,categorie,prix_unitaire,description,quantite,login)"
-                    + "VALUES (NULL,?,?,?,NULL,?,?)";
-                paramInsert=param;
-            }else {
-                 String[] param = {this.nom_produit,this.categorie, Float.toString(this.prix_unitaire),description, Integer.toString(this.quantite), newClassLogin};
-                 requeteInsert = "INSERT INTO ecommerce.produit"
-                    + "(id_produit,nom_produit,categorie,prix_unitaire,description,quantite,login)"
-                    + "VALUES (NULL,?,?,?,?,?,?)";
-                 paramInsert=param;
+                        + "(id_produit,nom_produit,categorie,prix_unitaire,description,quantite,login)"
+                        + "VALUES (NULL,?,?,?,NULL,?,?)";
+                paramInsert = param;
+            } else {
+                String[] param = {this.nom_produit, this.categorie, Float.toString(this.prix_unitaire), description, Integer.toString(this.quantite), newClassLogin};
+                requeteInsert = "INSERT INTO ecommerce.produit"
+                        + "(id_produit,nom_produit,categorie,prix_unitaire,description,quantite,login)"
+                        + "VALUES (NULL,?,?,?,?,?,?)";
+                paramInsert = param;
             }
-            
+
             ConnectBDD b = new ConnectBDD();
             try {
                 b.executeRequete(requeteInsert, paramInsert);
@@ -117,16 +118,16 @@ public class Produit implements Serializable {
             }
             b.closeConnect();
         } else {
-            
-            FacesContext.getCurrentInstance().addMessage("msg",new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning!", "Ce produit existe déjà"));
+
+            FacesContext.getCurrentInstance().addMessage("msg", new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning!", "Ce produit existe déjà"));
             System.out.println("Erreur nom en doublon");
-            FacesContext.getCurrentInstance().addMessage("nom",new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning!", "Veuillez en inscrire un autre produit"));
-        
+            FacesContext.getCurrentInstance().addMessage("nom", new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning!", "Veuillez en inscrire un autre produit"));
+
         }
     }
 
     public boolean testBDDNom(String newClassLogin) throws InstantiationException, SQLException, IllegalAccessException {
-        String requeteTest = "SELECT count(*) FROM  ecommerce.produit WHERE nom_produit='"+nom_produit+"' AND categorie='"+categorie+"' AND login='"+newClassLogin+"'";
+        String requeteTest = "SELECT count(*) FROM  ecommerce.produit WHERE nom_produit='" + nom_produit + "' AND categorie='" + categorie + "' AND login='" + newClassLogin + "'";
         ConnectBDD c = new ConnectBDD();
         c.executeRequete(requeteTest, null);
         ResultSet res = c.getResultat();
@@ -148,9 +149,8 @@ public class Produit implements Serializable {
     public List<Produit> getListFromage() throws SQLException, InstantiationException, IllegalAccessException {
         return getListProduit("Fromage");
     }
-    
-    
-     /**
+
+    /**
      *
      * @param categorie Saucisson , Pâté ou Fromage
      * @return
@@ -173,7 +173,7 @@ public class Produit implements Serializable {
             prod.setNom_produit(res.getString("nom_produit"));
             prod.setPrix_unitaire(res.getFloat("prix_unitaire"));
             prod.setQuantite(res.getInt("quantite"));
-            prod.setImage("resources/"+res.getString("image"));
+            prod.setImage("resources/" + res.getString("image"));
             /*Personne*/
             Personne pers = new Personne();
             pers.setId_personne(res.getInt("id_personne"));
@@ -192,14 +192,48 @@ public class Produit implements Serializable {
         b.closeConnect();
         return list;
     }
-    
+
+    public List<Produit> searchList(String nom_produit) throws SQLException, InstantiationException, IllegalAccessException {
+        String[] param = null;
+        String requeteSelect = "SELECT * FROM  ecommerce.produit INNER JOIN ecommerce.personne on personne.login=produit.login where produit.nom_produit LIKE '%"+ nom_produit +"%'";
+        ConnectBDD b = new ConnectBDD();
+        List<Produit> list = new ArrayList<>();
+        b.executeRequete(requeteSelect, param);
+        ResultSet res = b.getResultat();
+        while (res.next()) {
+            Produit prod = new Produit();
+            prod.setId_produit(res.getInt("id_produit"));
+            prod.setCategorie(res.getString("categorie"));
+            prod.setDescription(res.getString("description"));
+            prod.setNom_produit(res.getString("nom_produit"));
+            prod.setPrix_unitaire(res.getFloat("prix_unitaire"));
+            prod.setQuantite(res.getInt("quantite"));
+            prod.setImage("resources/" + res.getString("image"));
+            /*Personne*/
+            Personne pers = new Personne();
+            pers.setId_personne(res.getInt("id_personne"));
+            pers.setLogin(res.getString("login"));
+            pers.setMdp(res.getString("mdp"));
+            pers.setNom(res.getString("nom"));
+            pers.setPrenom(res.getString("prenom"));
+            pers.setAdresse(res.getString("adresse"));
+            pers.setCdp(res.getString("cdp"));
+            pers.setVille(res.getString("ville"));
+            pers.setFonction(res.getString("fonction"));
+            prod.setMyFournisseur(pers);
+            prod.setLogin(pers.getLogin());
+            list.add(prod);
+        }
+        return list;
+    }
+
     public List<Produit> getListPanier(String newClassLogin) throws SQLException, InstantiationException, IllegalAccessException {
         String[] param = null;
         String requeteSelect = "SELECT produit.categorie,produit.nom_produit,produit.description, produit.prix_unitaire ,ligne_commande.quantite, produit.prix_unitaire * ligne_commande.quantite "
-                +"FROM ecommerce.produit "
+                + "FROM ecommerce.produit "
                 + "inner join ecommerce.ligne_commande on produit.id_produit=ligne_commande.id_produit "
                 + "INNER JOIN ecommerce.commande on commande.id_commande=ligne_commande.id_commande "
-                + "WHERE commande.statut='progress' and commande.login='"+newClassLogin+"'";
+                + "WHERE commande.statut='progress' and commande.login='" + newClassLogin + "'";
         ConnectBDD b = new ConnectBDD();
         List<Produit> list = new ArrayList<>();
         b.executeRequete(requeteSelect, param);
@@ -217,8 +251,7 @@ public class Produit implements Serializable {
         b.closeConnect();
         return list;
     }
-    
-    
+
     /**
      * Get the value of quantite
      *
@@ -331,8 +364,6 @@ public class Produit implements Serializable {
         return "Produit{" + "id_produit=" + id_produit + '}';
     }
 
-    
-    
     /**
      * Set the value of id_produit
      *
@@ -341,15 +372,15 @@ public class Produit implements Serializable {
     public void setId_produit(Integer id_produit) {
         this.id_produit = id_produit;
     }
-    
-  public void ModifProduit() throws SQLException, InstantiationException, IllegalAccessException {
+
+    public void ModifProduit() throws SQLException, InstantiationException, IllegalAccessException {
         FacesMessage message = null;
         String[] param = null;
-        String requeteSelect = "UPDATE produit SET quantite="+Integer.toString(quantite)+" WHERE id_produit="+Integer.toString(id_produit)+"";
+        String requeteSelect = "UPDATE produit SET quantite=" + Integer.toString(quantite) + " WHERE id_produit=" + Integer.toString(id_produit) + "";
         ConnectBDD b = new ConnectBDD();
         b.executeRequete(requeteSelect, param);
-        message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Félicitations !", "Votre quantité du produit ayant pour id:"+id_produit+" a été modifié:"+ quantite);
-        FacesContext.getCurrentInstance().addMessage("msg" , message);
+        message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Félicitations !", "Votre quantité du produit ayant pour id:" + id_produit + " a été modifié:" + quantite);
+        FacesContext.getCurrentInstance().addMessage("msg", message);
 
-}
+    }
 }

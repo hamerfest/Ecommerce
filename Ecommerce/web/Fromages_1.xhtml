@@ -1,16 +1,15 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui" xmlns:c="http://xmlns.jcp.org/jsp/jstl/core" >
+      xmlns:p="http://primefaces.org/ui" xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <f:view contentType="text/html">
         <h:head>
             <link rel="stylesheet" type="text/css" href="resources/Ecommerce.css" title="Ecommerce" />
             <f:facet name="first">
                 <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
-                <title>Formulaire Ajout Produit</title>
+                <title>Fromages</title>
             </f:facet>
         </h:head>
 
@@ -26,7 +25,7 @@
                                      margin-top: 1%;
                                      vertical-align: top" placeholder="Rechercher"/> 
 
-                       <p:commandButton value="Rechercher" update="" icon="ui-icon-search" styleClass="commandButton" action="Recherche.xhtml?faces-redirect=true"/>
+                        <p:commandButton value="Rechercher" update="" icon="ui-icon-search" styleClass="commandButton" />
 
                         <c:if test="${newClass.login!=' '}">
                             <p:commandButton value="Déconnexion" icon='ui-icon-cancel' action="index.xhtml?faces-redirect=true"  style=" margin-left: 18%; margin-bottom: 1%;margin-top: 1%;vertical-align: top"/>
@@ -35,14 +34,14 @@
                         <p:growl id="messages" showDetail="true" />
 
                         <c:if test="${(newClass.fonction=='client')}">"
-                        <p:menubar styleClass="menu">
-                            <p:menuitem value="Nos Saucissons" url="http://localhost:8080/Ecommerce/faces/Saucissons.xhtml" />
+                            <p:menubar styleClass="menu">
+                                <p:menuitem value="Nos Saucissons" url="http://localhost:8080/Ecommerce/faces/Saucissons.xhtml" />
 
-                            <p:menuitem value="Nos Fromages" url="http://localhost:8080/Ecommerce/faces/Fromages.xhtml"/>
+                                <p:menuitem value="Nos Fromages" url="http://localhost:8080/Ecommerce/faces/Fromages.xhtml"/>
 
-                            <p:menuitem value="Nos Pâtés" url="http://localhost:8080/Ecommerce/faces/Pates.xhtml"/>
+                                <p:menuitem value="Nos Pâtés" url="http://localhost:8080/Ecommerce/faces/Pates.xhtml"/>
 
-                        </p:menubar>
+                            </p:menubar>
                         </c:if>     
                     </p:layoutUnit>
 
@@ -77,51 +76,36 @@
 
                     </p:layoutUnit>
 
-                    <p:layoutUnit position="center">
+                    <p:layoutUnit position="center" >
 
-                        <f:facet name="header">
-                            <div style='text-align: center'>
-                                Formulaire d'ajout produit !
-                            </div>
-                        </f:facet>
+                        <p:dataGrid var="produit" value="#{produit.getListProduit('Fromage')}" columns="3"                                         
+                                    rows="12" paginator="true" id="produit"
+                                    paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                    rowsPerPageTemplate="6,12,16">
 
-                        <h:form>
-                            <p:messages id="msg" showDetail="true" autoUpdate="true" closable="true" />
-                            <h:panelGrid id="formProduit" styleClass="panel_center" columns="3" cellpadding="5">
-                                <h:outputStylesheet name="Ecommerce.css" />
-                                <p:outputLabel for="nom" value="Nom du produit :" />
-                                <p:inputMask id="nom" value="#{produit.nom_produit}" required="true" mask=""/>
-                                <p:message for="nom"/>
+                            <f:facet name="header">
+                                Nos Fromages
+                            </f:facet>
 
-                                <p:outputLabel for="cat" value="Catégorie :" />
-                                <p:selectOneMenu id="cat" value="#{produit.categorie}" required ="true" style="width:225px">
-                                    <f:selectItem itemLabel="Votre Catégorie" itemValue="" />
-                                    <f:selectItem itemLabel="Fromage" itemValue="Fromage" />
-                                    <f:selectItem itemLabel="Saucisson" itemValue="Saucisson" />
-                                    <f:selectItem itemLabel="Pâté" itemValue="Pâté" />
-                                </p:selectOneMenu>
-                                <p:message for="cat"/>
+                            <p:panel header="#{produit.nom_produit}" style="text-align:center">
+                                <h:panelGrid columns="1" style="width: 100%; text-align: center">
+                                    <p:graphicImage value="#{produit.image}.jpg" height="100px" width="100px"/> 
 
-                                <p:outputLabel for="prx" value="Prix Unitaire :" />
-                                <p:inputMask id="prx" value="#{produit.prix_unitaire}"  required="true" mask="" />
-                                <p:message for="prx"/>
+                                    <h:outputText value="Prix : #{produit.prix_unitaire}€" style="text-align: center"/>
+                                    <h:outputText value="Stock : #{produit.quantite}" style="text-align: center"/>
+                                    <h:inputText value ="#{produit.quantiteSelected}" />
+                                    <p:commandButton icon="ui-icon-check"  value="Ajouter au Panier" actionListener="#{produit.addLgCommande(newClass.login,produit.id_produit,produit.quantiteSelected)}"/>
+                                </h:panelGrid>
 
+                            </p:panel>
 
-                                <p:outputLabel for="desc" value="Description :" />
-                                <p:inputMask id="desc" value="#{produit.description}" mask=""/>
-                                <p:message for="desc"/>
+                        </p:dataGrid>
 
-                                <p:outputLabel for="quantite" value="Quantité ajoutée :" />
-                                <p:spinner id="quantite" value="#{produit.quantite}" min='1' required="true" />
-                                <p:message for="quantite"/>
-                                
-                                <p:commandButton value="Réinitialiser" type="reset" styleClass="commandButton" />
-                                <p:commandButton update="formProduit" value="Ajouter Produit" actionListener="#{produit.addProduit(newClass.login)}" styleClass="commandButton"/>
-                            </h:panelGrid>
-                        </h:form>
                     </p:layoutUnit>
+
                 </p:layout>
             </h:form>
         </h:body>
+
     </f:view>
 </html>

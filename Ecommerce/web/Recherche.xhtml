@@ -1,29 +1,33 @@
-
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui" xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
-
+      xmlns:p="http://primefaces.org/ui" xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      >
     <f:view contentType="text/html">
         <h:head>
             <link rel="stylesheet" type="text/css" href="resources/Ecommerce.css" title="Ecommerce" />
             <f:facet name="first">
                 <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
-                <title>Accueil</title>
+                <title>Votre Sélection !</title>
             </f:facet>
-
         </h:head>
 
         <h:body >
 
-            <h:form>
-
+            <h:form> 
                 <p:layout fullPage="true" >
                     <h:outputStylesheet name="Ecommerce.css" />
 
-                    <p:layoutUnit  styleClass="layoutNorth" position="north" size="150" resizable="false" closable="false" collapsible="false" >
+                    <p:layoutUnit  position="north" size="150" styleClass="layoutNorth" resizable="false" closable="false" collapsible="false" >
+
                         <img src="resources/J2EE.png" width="150" height="65" vertical-align="top" margin-left="5" />                        
 
                         <p:inputText style="margin-left: 29%;
@@ -31,24 +35,19 @@
                                      margin-top: 1%;
                                      vertical-align: top" placeholder="Rechercher"/> 
 
-                        <p:commandButton value="Rechercher" update="" icon="ui-icon-search" styleClass="commandButton" action="Recherche.xhtml?faces-redirect=true"/>
-
-                        <c:if test="${newClass.login!=' '}">
-                            <p:commandButton value="Déconnexion" icon='ui-icon-cancel' action="index.xhtml?faces-redirect=true"  style=" margin-left: 18%; margin-bottom: 1%;margin-top: 1%;vertical-align: top"/>
-                        </c:if>
+                        <p:commandButton value="Rechercher" update="" icon="ui-icon-search" styleClass="commandButton" action="recherche.xhtml?faces-redirect=true"/>
 
                         <p:growl id="messages" showDetail="true" />
 
-                        <c:if test="${(newClass.fonction=='client')}">"
                         <p:menubar styleClass="menu">
-                            <p:menuitem value="Nos Saucissons" url="http://localhost:8080/Ecommerce/faces/Saucissons.xhtml" />
+                            <p:menuitem value="Nos Saucissons" url="http://localhost:8080/Ecommerce/faces/Saucissons.xhtml"/>
 
                             <p:menuitem value="Nos Fromages" url="http://localhost:8080/Ecommerce/faces/Fromages.xhtml"/>
 
                             <p:menuitem value="Nos Pâtés" url="http://localhost:8080/Ecommerce/faces/Pates.xhtml"/>
 
                         </p:menubar>
-                        </c:if>     
+
                     </p:layoutUnit>
 
                     <p:layoutUnit position="east" size="175" header="Menu" collapsible="false" >
@@ -79,43 +78,43 @@
                                 </c:if>
                             </p:menuButton>
                         </c:if>
-                        
-                        <c:if test="${(newClass.fonction=='admin' || newClass.fonction=='fournisseur')}"> 
-                         <p:menuButton value="Modification" style="margin-top: 2%; ">
-                              <p:menuitem value="Saucissons" url="http://localhost:8080/Ecommerce/faces/ModifSauci.xhtml" />
-                              <p:menuitem value="Pâtés" url="http://localhost:8080/Ecommerce/faces/ModifPate.xhtml"  />
-                              <p:menuitem value="Fromages" url="http://localhost:8080/Ecommerce/faces/ModifFrom.xhtml"  />
-                              <c:if test="${(newClass.fonction=='admin')}">
-                              <p:menuitem value="Utilisateurs" url="http://localhost:8080/Ecommerce/faces/ModifUser.xhtml" />
-                              </c:if>
-                         </p:menuButton>
-                        </c:if>
-                       
+
                     </p:layoutUnit>
 
                     <p:layoutUnit position="center">
+                        <p:tab title="Liste des utilisateurs">  
 
-                        <f:facet name="header">
-                            <div style='text-align: center' margin-bottom='1%'>
-                                Bienvenue !
-                            </div>
-                        </f:facet>
+                            <p:dataTable id="dataTable" var="produit" value="#{produit.searchList(newClass.mot)}" sortMode="multiple" rows="5" paginator="true">  
+                                <f:facet name="header">  
+                                    Résultat 
+                                </f:facet>  
+                                <p:column sortBy="categorie" headerText="Categorie">  
+                                    <h:outputText value="#{produit.categorie}" />  
+                                </p:column> 
+                                
+                                <p:column sortBy="nom_produit" headerText="Nom">  
+                                    <h:outputText value="#{produit.nom_produit}" />  
+                                </p:column>  
 
-                        <div style='text-align: center'>
-                            <h3> Venez commander nos savoureux produits du terroir ! </h3>
-                        </div>
-                        <p:galleria value="#{produit.getListProduit('Fromage')}" var="p" panelWidth="1100" panelHeight="313" showCaption="true" style="margin: 0 auto; text-align: center ">
-                            <p:graphicImage value="#{p.image}.jpg" alt="Description du produit: #{p.description}" title="#{p.nom_produit}" style="text-align: center"/>
-                        </p:galleria>
+                                <p:column sortBy="description " headerText="Description">  
+                                    <h:outputText value="#{produit.description}" />  
+                                </p:column>  
 
+                                <p:column sortBy="prix_unitaite" headerText="Prix unitaire">  
+                                    <h:outputText value="#{produit.prix_unitaire}" />  
+                                </p:column>
+
+                                <p:column sortBy="quantite" headerText="Quantité">  
+                                    <h:outputText value="#{produit.quantite}" />  
+                                </p:column>
+
+                                
+                            </p:dataTable>
+                        </p:tab>
                     </p:layoutUnit>
 
                 </p:layout>
             </h:form>
-
-
         </h:body>
-
     </f:view>
 </html>
-
