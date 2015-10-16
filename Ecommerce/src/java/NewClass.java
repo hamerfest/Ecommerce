@@ -32,10 +32,19 @@ public class NewClass implements Serializable {
     private String login;
     private String mdp;
     private String fonction;
+    private String mot;
     /*
      Save Personne into dataBase
      Par defaut fonction = "Client"
      */
+
+    public String getMot() {
+        return mot;
+    }
+
+    public void setMot(String mot) {
+        this.mot = mot;
+    }
 
     public void savePersonne() throws InstantiationException, IllegalAccessException, SQLException {
         if (!testBDDLogin()) {
@@ -214,6 +223,8 @@ public class NewClass implements Serializable {
             nom = getPersonne().getNom();
             prenom = getPersonne().getPrenom();
             fonction = getPersonne().getFonction();
+            NewClass user= getPersonne();
+            mot="";
             loggedIn = true;
             message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Welcome", getPersonne().getLogin());
         } else {

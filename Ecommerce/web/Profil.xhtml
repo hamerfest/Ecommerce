@@ -32,7 +32,7 @@
                                      margin-top: 1%;
                                      vertical-align: top" placeholder="Rechercher"/> 
 
-                        <p:commandButton value="Rechercher" update="" icon="ui-icon-search" styleClass="commandButton" />
+                       <p:commandButton value="Rechercher" update="" icon="ui-icon-search" styleClass="commandButton" action="Recherche.xhtml?faces-redirect=true"/>
 
                         <c:if test="${newClass.login!=' '}">
                             <p:commandButton value="Déconnexion" icon='ui-icon-cancel' action="index.xhtml?faces-redirect=true"  style=" margin-left: 18%; margin-bottom: 1%;margin-top: 1%;vertical-align: top"/>
