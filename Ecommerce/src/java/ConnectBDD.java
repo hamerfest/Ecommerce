@@ -6,7 +6,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
 
-
 public class ConnectBDD {
 
     private Connection myConnexion;
@@ -74,8 +73,8 @@ public class ConnectBDD {
     }
 
     public void executeRequete(String requete, String[] values) throws SQLException {
-        String typeRequete = requete.substring(0,6);
-        System.out.println("Type de requete :"+typeRequete);
+        String typeRequete = requete.substring(0, 6);
+        System.out.println("Type de requete :" + typeRequete);
         // TODO executeUpdate ==> retourne le résultat
         //executeQuery==> Executes the given SQL statement, which may be an INSERT, UPDATE, or DELETE statement or an SQL statement that returns nothing, such as an SQL DDL statement.
         int size = 0;
@@ -91,18 +90,30 @@ public class ConnectBDD {
                 System.out.println("Requete executée : selection de " + size + " résultats");
             } catch (SQLException e) {
                 System.out.println("Erreur lors de l'execution de la requete : " + e.getMessage());
-                   System.out.println(requete);
+                System.out.println(requete);
             }
         } else { /*UPDATE ou INSERT*/
+
             System.out.println("Traitement requete UPDATE or INSERT");
-            PreparedStatement sqlrequete = preparePreparedStatement(requete, values);
-            try {
-                size = preparedStatement.executeUpdate();
-                System.out.println("Requete executée : " + size + " action(s)");
-            } catch (SQLException e) {
-                System.out.println("Erreur lors de l'execution de la requete : " + e.getMessage());
-                System.out.println(sqlrequete);
+            if (values != null) {
+                PreparedStatement sqlrequete = preparePreparedStatement(requete, values);
+                try {
+                    size = preparedStatement.executeUpdate();
+                    System.out.println("Requete executée : " + size + " action(s)");
+                } catch (SQLException e) {
+                    System.out.println("Erreur lors de l'execution de la requete : " + e.getMessage());
+                    System.out.println(sqlrequete);
+                }
+            } else {
+                try {
+                    size = myStatement.executeUpdate(requete);
+                    System.out.println("Requete executée : " + size + " action(s)");
+                } catch (SQLException e) {
+                    System.out.println("Erreur lors de l'execution de la requete : " + e.getMessage());
+                    System.out.println(requete);
+                }
             }
+
         }
     }
 
